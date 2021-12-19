@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battleship</title>
+  <link rel="stylesheet" href="src/styles/style.css">
+</head>
+<body>
+
+  <div class="form-popup" id="login-form">
+    <h1>Welcome to Battleship!</h1>
+    <form action="" class="form-container">
+      <p for="name">Please enter your name</p>
+      <input class="name-input" type="text" placeholder="User name" name="name">
+      <p for="start">Press start to begin the game</p>
+      <!-- <button type="submit" class="start-button">START!</button> -->
+      <!-- BRING BACK NEXT LINE -->
+      <input type="submit" class="start-button" value="START!" />
+      <!-- <input type="submit" class="start-button" disabled value="START!" /> -->
+    </form>
+  </div>
+
+  <div class="game-screen">
+    <div class="game-screen-content">
+      <div class="battleship-panel">
+      </div>
+
+      <div class="info-panel">
+        <div class="game-resources">
+          <div class="shots">
+            <p>Shots</p>
+            <p>15/30</p>
+            <!-- TODO - add progress bar -->
+          </div>
+          <p>10:25</p>
+        </div>
+        <div class="4-cells">
+          4 cells
+        </div>
+        <div class="3-cells">
+          3 cells
+        </div>
+        <div class="2-cells">
+          2 cells
+        </div>
+        <div class="1-cells">
+          1 cell
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/js/index.js" type="module"></script>
+</body>
+</html>

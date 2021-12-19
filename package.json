@@ -1,0 +1,23 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Artyom-Borushko/Battleship.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Artyom-Borushko/Battleship/issues"
+  },
+  "homepage": "https://github.com/Artyom-Borushko/Battleship#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "sass": "^1.45.0"
+  }
+}
