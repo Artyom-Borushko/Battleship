@@ -1,4 +1,5 @@
 import { createBattleshipGrid } from "./battleshipGrid.js";
+import { countdownTimer } from "./infoPanel.js";
 
 const loginFormSelector = document.querySelector('#login-form');
 const nameInputSelector = document.querySelector('.name-input');
@@ -21,10 +22,12 @@ function loginButtonEnabler(event) {
 }
 
 function onLoginFormSubmit(event) {
+  countdownTimer();
   event.preventDefault();
   loginFormSelector.style.display = "none";
   gameScreenSelector.style.display = "block";  
   createBattleshipGrid();
+  
   // TODO - add user name to storage
 
 }

@@ -57,9 +57,11 @@ body {
 .game-screen {
   display: none;
   .game-screen-content {
+    height: 100vh;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
   }
   .battleship-panel {
     display: flex;
@@ -81,7 +83,19 @@ body {
     flex-direction: column;
     .game-resources {
       display: flex;
-
+      min-width: 300px;
+      justify-content: space-between;
+      .ammo-progress-bar {
+        min-width: 150px;
+        border: 2px solid rgb(2, 2, 2);
+        border-radius: 10% / 50%;
+        .ammo-progress-bar-line {
+          width: 0%;
+          height: 15px;
+          background-color: rgb(243, 131, 131);
+          border-radius: inherit;
+        }
+      }
     }
   }
 }

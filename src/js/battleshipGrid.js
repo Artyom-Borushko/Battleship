@@ -1,5 +1,14 @@
-const cellHeaders = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'J', 'K', 'M']
+import { reduceAmmo, updateAmmoProgressBar } from "./infoPanel.js";
+
+const cellHeaders = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'J', 'K', 'M'];
+
 const battleshipGrid = document.querySelector('.battleship-panel');
+
+document.addEventListener('click', function(event){
+  if (event.target.className.includes('battleship-cell-playable')) {
+    attack();
+  }
+})
 
 export function createBattleshipGrid() {
   for (let column = 0; column <= 10; column++) {
@@ -25,4 +34,9 @@ export function createBattleshipGrid() {
     }
     battleshipGrid.appendChild(columnDiv);
   }
+}
+
+function attack() {
+  reduceAmmo();
+  updateAmmoProgressBar();
 }
