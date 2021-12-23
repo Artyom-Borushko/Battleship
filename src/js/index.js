@@ -1,6 +1,7 @@
 import { createBattleshipGrid } from "./battleshipGrid.js";
 import { countdownTimer } from "./infoPanel.js";
-import { initializeShips } from "./battleshipGrid.js";
+import { generateEmptyCells } from "./battleshipGrid.js";
+import { shipsInitializer } from "./battleshipGrid.js";
 
 const boat4 = {
   boatLength: 4,
@@ -59,17 +60,17 @@ function onLoginFormSubmit(event) {
   loginFormSelector.style.display = "none";
   gameScreenSelector.style.display = "block";  
   createBattleshipGrid();
-  initializeShips(boat4);
-  initializeShips(boat3_1);
-  initializeShips(boat3_2);
-  // initializeShips(boat2_1);
-  // initializeShips(boat2_2);
-  // initializeShips(boat2_3);
-  // initializeShips(boat1_1);
-  // initializeShips(boat1_2);
-  // initializeShips(boat1_3);
-  // initializeShips(boat1_4);
-
+  generateEmptyCells();
+  shipsInitializer(boat4);
+  shipsInitializer(boat3_1);
+  shipsInitializer(boat3_2);
+  shipsInitializer(boat2_1);
+  shipsInitializer(boat2_2);
+  shipsInitializer(boat2_3);
+  shipsInitializer(boat1_1);
+  shipsInitializer(boat1_2);
+  shipsInitializer(boat1_3);
+  shipsInitializer(boat1_4);
   
   // TODO - add user name to storage
 

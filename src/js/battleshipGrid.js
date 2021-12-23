@@ -1,8 +1,6 @@
 import { reduceAmmo, updateAmmoProgressBar } from "./infoPanel.js";
 
 const cellHeaders = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'J', 'K', 'M']
-const locatorStorage = [];
-const occupiedCoordinatesStorage = []; // mb replace to set
 
 const battleshipGrid = document.querySelector('.battleship-panel');
 
@@ -45,29 +43,14 @@ function attack(e) {
   testInfo(e);
 }
 
-// ship spawn logic
-// const boat4 = {
-//   boatLength: 4,
-// }
-// const boat3_1 = {
-//   boatLength: 3,
-// }
-// const boat3_2 = {
-//   boatLength: 3,
-// }
+let emptyCells = [];
+const occupiedStorage = [];
 
 function testInfo(e) {
   // const testInfo = document.querySelectorAll('.battleship-cell-playable');
-  // console.log(testInfo)
-  
-  // reallyHardLogic(boat4);
-  // reallyHardLogic(boat3_1);
-  // reallyHardLogic(boat3_2);
 
-  // generateEmptyCells()
-  // console.log(emptyCells, 'empty space')
-
-  let mapper = locatorStorage.filter(element => element === e.target.dataset.location);
+  // let mapper = locatorStorage.filter(element => element === e.target.dataset.location);
+  let mapper = occupiedStorage.filter(element => element === e.target.dataset.location);
   if (mapper.length) {
     e.target.style.backgroundColor = 'red';
   }
@@ -77,170 +60,98 @@ function generateDirection() {
   return Math.round(Math.random());
 }
 
-function generateColumnToStart() {
-  return Math.round(Math.random() * 10) + 1;
+function generatePlaceToStart() {
+  const initialCoordinates = Math.round(Math.random() * emptyCells.length) + 1;
+  return emptyCells[initialCoordinates];
 }
 
+export function generateEmptyCells() {
+  for (let i = 1; i <= 10; i++) {
+    for (let j = 1; j <= 10; j++) {
+      emptyCells.push(`${i}-${j}`);
+    }
+  }
+}
 
-// const emptyCells = new Set();
-
-// function generateEmptyCells() {
-//   for (let i = 1; i <= 10; i++) {
-//     for (let j = 1; j <= 10; j++) {
-//       // emptyCells.push(`${i}-${j}`)
-//       emptyCells.add(`${i}-${j}`);
-//     }
-//   }
-// }
-
-// function anotherInitializeShips(boat) {
-//   let isPlaced = false;
-  
-//   while (!isPlaced) {
-//     const direction = generateDirection();
-//     const columnToStart = generateColumnToStart();
-//     if (direction === 1 && columnToStart + boat.boatLength - 1 > 10) {
-//       continue
-//     } else if (direction === 1 && emptyCells.has(`${columnToStart}-${columnToStart + boat.boatLength}`)) {
-
-//     }
-//   }   
-// }
-
-
-
-const occupiedStorage = [];
-let iterations = 0;
-
-export function initializeShips(boat3) {
+export function shipsInitializer(boat) {
   let isPlaced = false;
   
   while (!isPlaced) {
     const direction = generateDirection();
-    const columnToStart = generateColumnToStart();
-    
-    console.log(direction, 'direction')
-  // 1 - column, 0 - row
+    const placeToStart = generatePlaceToStart();
+    const columnToStart = parseInt(placeToStart.substring(0, placeToStart.indexOf('-')));
+    const rowToStart = parseInt(placeToStart.substring(placeToStart.lastIndexOf('-') + 1));
+
     if (direction === 1) {
-      // console.log(iterations, 'iterations upper')
-      if (columnToStart + boat3.boatLength - 1 > 10) continue;
-      if (iterations === 0) {
-        ++iterations;
-        // console.log(iterations, 'iterations')
-        for (let i = 0; i < boat3.boatLength; i++) {
-          locatorStorage.push(`${columnToStart}-${columnToStart + i}`);
-        }
-        columnOccupationLogic(locatorStorage);
-        isPlaced = true;
-      } else {
-        let testOccupiedVerification = [];
-        for (let i = 0; i < boat3.boatLength; i++) {
-          testOccupiedVerification.push(`${columnToStart}-${columnToStart + i}`);
-        }
-        console.log(testOccupiedVerification, 'test occupied verification to debug')
-        console.log(occupiedCoordinatesStorage, 'occupied coordinates to debug')
-          const intersection = occupiedCoordinatesStorage.filter(element => testOccupiedVerification.includes(element));
-          console.log(intersection, 'this is an intersection')
-          // occupiedCoordinatesStorage
-          // locatorStorage
-          if (intersection.length) {
-            continue
-          } else {
-            locatorStorage.push(...testOccupiedVerification);
-            columnOccupationLogic(testOccupiedVerification);
-            isPlaced = true;
-          }
-        }
-      console.log(locatorStorage, 'locator in column logic')
-      // columnOccupationLogic(locatorStorage)
-      // break;
-    }
-    
-    if (direction === 0) {
-      // console.log(iterations, 'iterations upper')
-      if (columnToStart + boat3.boatLength - 1 > 10) continue;
-      if (iterations === 0) {
-        ++iterations;
-        // console.log(iterations, 'iterations')
-        for (let i = 0; i < boat3.boatLength; i++) {
-          locatorStorage.push(`${columnToStart + i}-${columnToStart}`);
-        }
-        rowOccupationLogic(locatorStorage);
-        isPlaced = true;
-      } else {
-        let testOccupiedVerification = [];
-        for (let i = 0; i < boat3.boatLength; i++) {
-          testOccupiedVerification.push(`${columnToStart + i}-${columnToStart}`);
-        }
-        // console.log(testOccupiedVerification, 'test occupied verification to debug')
-        // console.log(occupiedCoordinatesStorage, 'occupied coordinates to debug')
-          const intersection = occupiedCoordinatesStorage.filter(element => testOccupiedVerification.includes(element));
-          console.log(intersection, 'this is an intersection')
-          // occupiedCoordinatesStorage
-          // locatorStorage
-          if (intersection.length) {
-            continue
-          } else {
-            locatorStorage.push(...testOccupiedVerification);
-            rowOccupationLogic(testOccupiedVerification);
-            isPlaced = true;
-            // break
-          }
+      let indicator = false;
+      for (let i = 0; i < boat.boatLength; i++) {
+        if (emptyCells.indexOf(`${columnToStart}-${rowToStart + i}`) > -1 && rowToStart + i < 10) {
+          indicator = true;
+        } else {
+          indicator = false;
+          break;
+        } 
       }
-      console.log(locatorStorage, 'locator in row logic')
+      if (indicator) {
+        const tempOccupation = []
+        for (let i = 0; i < boat.boatLength; i++) {
+          tempOccupation.push(`${columnToStart}-${rowToStart + i}`);
+          occupiedStorage.push(`${columnToStart}-${rowToStart + i}`);
+        }
+        const occupiedArr = columnOccupationLogic(tempOccupation);
+        for (let i = 0; i < occupiedArr.length; i++) {
+          emptyCells = emptyCells.filter(item => item !== occupiedArr[i]);
+        }
+        isPlaced = true;
+      }
+    } else if (direction === 0) {
+      let indicator = false;
+      for (let i = 0; i < boat.boatLength; i++) {
+        if (emptyCells.indexOf(`${columnToStart + i}-${rowToStart}`) > -1 && columnToStart + i < 10) {
+          indicator = true;
+        } else {
+          indicator = false;
+          break
+        } 
+      }
+      if (indicator) {
+        const tempOccupation = []
+        for (let i = 0; i < boat.boatLength; i++) {
+          tempOccupation.push(`${columnToStart + i}-${rowToStart}`);
+          occupiedStorage.push(`${columnToStart + i}-${rowToStart}`);
+        }
+        const occupiedArr = rowOccupationLogic(tempOccupation);
+        for (let i = 0; i < occupiedArr.length; i++) {
+          emptyCells = emptyCells.filter(item => item !== occupiedArr[i]);
+        }
+        isPlaced = true;
+      }
     }
-
-
-    // old realization
-    // if (direction === 0) {
-    //   console.log('row workflow')
-    //   if (columnToStart + boat3.boatLength - 1 > 10) continue;
-    //   for (let i = 0; i < boat3.boatLength; i++) {
-    //     // const element = [i];
-    //     locatorStorage.push(`${columnToStart + i}-${columnToStart}`);
-        
-    //   }
-    //   console.log(locatorStorage, 'locator in row logic')
-    //   rowOccupationLogic(locatorStorage)
-    //   break;
-    // }
-  }
-  
-
+  }   
 }
 
-
 function columnOccupationLogic(coordinates) {
-  let first1 = `${coordinates[0]}`;
-  first1 = first1.substring(0, first1.indexOf('-'));
-  let last1 = `${coordinates[coordinates.length - 1]}`;
-  last1 = last1.substring(last1.lastIndexOf('-') + 1);
-  let first = parseInt(first1);
-  let last = parseInt(last1);
-  // console.log(first, 'first')
-  // console.log(last, 'last')
-  for (let i = first - 1; i <= first + 1; i++) {
-    for (let j = first - 1; j <= last + 1; j++) {
-      // console.log(`${i}-${j}`, 'HAHAHAHA')
-      occupiedCoordinatesStorage.push(`${i}-${j}`);
+  const firstPairFirstCoordinate = parseInt(`${coordinates[0]}`.substring(0, `${coordinates[0]}`.indexOf('-')));
+  const lastPairSecondCoordinate = parseInt(`${coordinates[coordinates.length - 1]}`.substring(`${coordinates[coordinates.length - 1]}`.lastIndexOf('-') + 1));
+  const firstPairSecondCoordinate = parseInt(`${coordinates[0]}`.substring(`${coordinates[0]}`.lastIndexOf('-') + 1));
+  let arr = [];
+  for (let i = firstPairFirstCoordinate - 1; i <= firstPairFirstCoordinate + 1; i++) {
+    for (let j = firstPairSecondCoordinate - 1; j <= lastPairSecondCoordinate + 1; j++) {
+      arr.push(`${i}-${j}`);
     }
   }
-  console.log(occupiedCoordinatesStorage, 'resulting column occupied coordinates')
+  return arr;
 }
 
 function rowOccupationLogic(coordinates) {
-  let first1 = `${coordinates[0]}`;
-  first1 = first1.substring(0, first1.indexOf('-'));
-  let first = parseInt(first1);
-  let lastColumn1 = `${coordinates[coordinates.length - 1]}`
-  lastColumn1 = lastColumn1.substring(0, lastColumn1.indexOf('-'))
-  let lastColumn = parseInt(lastColumn1);
-  for (let i = first - 1; i <= lastColumn + 1; i++) {
-    for (let j = first - 1; j <= first + 1; j++) {
-      // console.log(`${i}-${j}`, 'HAHAHAHA')
-      occupiedCoordinatesStorage.push(`${i}-${j}`);
+  const firstPairFirstCoordinate = parseInt(`${coordinates[0]}`.substring(0, `${coordinates[0]}`.indexOf('-')));
+  const lastPairFirstCoordinate = parseInt(`${coordinates[coordinates.length - 1]}`.substring(0, `${coordinates[coordinates.length - 1]}`.indexOf('-')));
+  const firstPairSecondCoordinate = parseInt(`${coordinates[0]}`.substring(`${coordinates[0]}`.lastIndexOf('-') + 1));
+  const arr = [];
+  for (let i = firstPairFirstCoordinate - 1; i <= lastPairFirstCoordinate + 1; i++) {
+    for (let j = firstPairSecondCoordinate - 1; j <= firstPairSecondCoordinate + 1; j++) {
+      arr.push(`${i}-${j}`);
     }
-    
   }
-  console.log(occupiedCoordinatesStorage, 'resulting row occupied coordinates')
+  return arr;
 }
