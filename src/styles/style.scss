@@ -65,7 +65,8 @@ body {
   }
   .battleship-panel {
     display: flex;
-    max-width: 500px;
+    min-width: 600px;
+    margin-right: 50px;
     div {
       min-height: 50px;
       flex: 1 0 50px;

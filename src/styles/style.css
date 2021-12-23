@@ -153,7 +153,8 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  max-width: 500px;
+  min-width: 600px;
+  margin-right: 50px;
 }
 
 .game-screen .battleship-panel div {
