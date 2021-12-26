@@ -1,4 +1,3 @@
-
 const ammoProgressBar = document.querySelector('.ammo-progress-bar-line');
 const countDownTimer = document.querySelector('.countdown-timer');
 const ammoInfo = document.querySelector('.available-ammo');
@@ -8,7 +7,7 @@ let defaultAmmo = 0;
 
 export function countdownTimer() {
   const countDownDate = new Date(Date.now() + 15 * 60000);
-  const timer = setInterval(function() {
+  const timer = setInterval(() => {
     const now = new Date().getTime();
     const distance = countDownDate - now;
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -17,17 +16,17 @@ export function countdownTimer() {
 
     if (distance < 0) {
       clearInterval(timer);
-      countDownTimer.innerHTML = "EXPIRED";
+      countDownTimer.innerHTML = 'EXPIRED';
       // TODO - implement end game logic
     }
-  }, 1000)
+  }, 1000);
 }
 
 export function reduceAmmo() {
   availableAmmo--;
   ammoInfo.innerHTML = `${availableAmmo}/30`;
   if (availableAmmo <= 0) {
-    ammoInfo.innerHTML = "EMPTY";
+    ammoInfo.innerHTML = 'EMPTY';
     // TODO - implement end game logic
   }
 }

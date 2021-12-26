@@ -1,14 +1,10 @@
-import { reduceAmmo, updateAmmoProgressBar } from "./infoPanel.js";
+import { reduceAmmo, updateAmmoProgressBar } from './infoPanel';
 
-const cellHeaders = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'J', 'K', 'M']
+const cellHeaders = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'J', 'K', 'M'];
+let emptyCells = [];
+const occupiedStorage = [];
 
 const battleshipGrid = document.querySelector('.battleship-panel');
-
-document.addEventListener('click', function(event){
-  if (event.target.className.includes('battleship-cell-playable')) {
-    attack(event);
-  }
-})
 
 export function createBattleshipGrid() {
   for (let column = 0; column <= 10; column++) {
@@ -37,20 +33,19 @@ export function createBattleshipGrid() {
   }
 }
 
+function highlightHit(e) {
+  const mapper = occupiedStorage.filter(
+    (element) => element === e.target.dataset.location,
+  );
+  if (mapper.length) {
+    e.target.style.backgroundColor = 'red';
+  }
+}
+
 function attack(e) {
   reduceAmmo();
   updateAmmoProgressBar();
   highlightHit(e);
-}
-
-let emptyCells = [];
-const occupiedStorage = [];
-
-function highlightHit(e) {
-  let mapper = occupiedStorage.filter(element => element === e.target.dataset.location);
-  if (mapper.length) {
-    e.target.style.backgroundColor = 'red';
-  }
 }
 
 function generateDirection() {
@@ -70,68 +65,12 @@ export function generateEmptyCells() {
   }
 }
 
-export function shipsInitializer(boat) {
-  let isPlaced = false;
-  
-  while (!isPlaced) {
-    const direction = generateDirection();
-    const placeToStart = generatePlaceToStart();
-    const columnToStart = parseInt(placeToStart.substring(0, placeToStart.indexOf('-')));
-    const rowToStart = parseInt(placeToStart.substring(placeToStart.lastIndexOf('-') + 1));
-
-    if (direction === 1) {
-      let indicator = false;
-      for (let i = 0; i < boat.boatLength; i++) {
-        if (emptyCells.indexOf(`${columnToStart}-${rowToStart + i}`) > -1 && rowToStart + i < 10) {
-          indicator = true;
-        } else {
-          indicator = false;
-          break;
-        } 
-      }
-      if (indicator) {
-        const tempOccupation = []
-        for (let i = 0; i < boat.boatLength; i++) {
-          tempOccupation.push(`${columnToStart}-${rowToStart + i}`);
-          occupiedStorage.push(`${columnToStart}-${rowToStart + i}`);
-        }
-        const occupiedArr = columnOccupationLogic(tempOccupation);
-        for (let i = 0; i < occupiedArr.length; i++) {
-          emptyCells = emptyCells.filter(item => item !== occupiedArr[i]);
-        }
-        isPlaced = true;
-      }
-    } else if (direction === 0) {
-      let indicator = false;
-      for (let i = 0; i < boat.boatLength; i++) {
-        if (emptyCells.indexOf(`${columnToStart + i}-${rowToStart}`) > -1 && columnToStart + i < 10) {
-          indicator = true;
-        } else {
-          indicator = false;
-          break
-        } 
-      }
-      if (indicator) {
-        const tempOccupation = []
-        for (let i = 0; i < boat.boatLength; i++) {
-          tempOccupation.push(`${columnToStart + i}-${rowToStart}`);
-          occupiedStorage.push(`${columnToStart + i}-${rowToStart}`);
-        }
-        const occupiedArr = rowOccupationLogic(tempOccupation);
-        for (let i = 0; i < occupiedArr.length; i++) {
-          emptyCells = emptyCells.filter(item => item !== occupiedArr[i]);
-        }
-        isPlaced = true;
-      }
-    }
-  }   
-}
-
 function columnOccupationLogic(coordinates) {
-  const firstPairFirstCoordinate = parseInt(`${coordinates[0]}`.substring(0, `${coordinates[0]}`.indexOf('-')));
-  const lastPairSecondCoordinate = parseInt(`${coordinates[coordinates.length - 1]}`.substring(`${coordinates[coordinates.length - 1]}`.lastIndexOf('-') + 1));
-  const firstPairSecondCoordinate = parseInt(`${coordinates[0]}`.substring(`${coordinates[0]}`.lastIndexOf('-') + 1));
-  let arr = [];
+  const firstPairFirstCoordinate = parseInt(`${coordinates[0]}`.substring(0, `${coordinates[0]}`.indexOf('-')), 10);
+  const lastPairSecondCoordinate = parseInt(`${coordinates[coordinates.length - 1]}`
+    .substring(`${coordinates[coordinates.length - 1]}`.lastIndexOf('-') + 1), 10);
+  const firstPairSecondCoordinate = parseInt(`${coordinates[0]}`.substring(`${coordinates[0]}`.lastIndexOf('-') + 1), 10);
+  const arr = [];
   for (let i = firstPairFirstCoordinate - 1; i <= firstPairFirstCoordinate + 1; i++) {
     for (let j = firstPairSecondCoordinate - 1; j <= lastPairSecondCoordinate + 1; j++) {
       arr.push(`${i}-${j}`);
@@ -141,9 +80,9 @@ function columnOccupationLogic(coordinates) {
 }
 
 function rowOccupationLogic(coordinates) {
-  const firstPairFirstCoordinate = parseInt(`${coordinates[0]}`.substring(0, `${coordinates[0]}`.indexOf('-')));
-  const lastPairFirstCoordinate = parseInt(`${coordinates[coordinates.length - 1]}`.substring(0, `${coordinates[coordinates.length - 1]}`.indexOf('-')));
-  const firstPairSecondCoordinate = parseInt(`${coordinates[0]}`.substring(`${coordinates[0]}`.lastIndexOf('-') + 1));
+  const firstPairFirstCoordinate = parseInt(`${coordinates[0]}`.substring(0, `${coordinates[0]}`.indexOf('-')), 10);
+  const lastPairFirstCoordinate = parseInt(`${coordinates[coordinates.length - 1]}`.substring(0, `${coordinates[coordinates.length - 1]}`.indexOf('-')), 10);
+  const firstPairSecondCoordinate = parseInt(`${coordinates[0]}`.substring(`${coordinates[0]}`.lastIndexOf('-') + 1), 10);
   const arr = [];
   for (let i = firstPairFirstCoordinate - 1; i <= lastPairFirstCoordinate + 1; i++) {
     for (let j = firstPairSecondCoordinate - 1; j <= firstPairSecondCoordinate + 1; j++) {
@@ -152,3 +91,72 @@ function rowOccupationLogic(coordinates) {
   }
   return arr;
 }
+
+export function shipsInitializer(boat) {
+  let isPlaced = false;
+
+  while (!isPlaced) {
+    const direction = generateDirection();
+    const placeToStart = generatePlaceToStart();
+    const columnToStart = parseInt(placeToStart.substring(0, placeToStart.indexOf('-')), 10);
+    const rowToStart = parseInt(placeToStart.substring(placeToStart.lastIndexOf('-') + 1), 10);
+
+    if (direction === 1) {
+      let indicator = false;
+      for (let i = 0; i < boat.boatLength; i++) {
+        if (
+          emptyCells.indexOf(`${columnToStart}-${rowToStart + i}`) > -1
+          && rowToStart + i < 10
+        ) {
+          indicator = true;
+        } else {
+          indicator = false;
+          break;
+        }
+      }
+      if (indicator) {
+        const tempOccupation = [];
+        for (let i = 0; i < boat.boatLength; i++) {
+          tempOccupation.push(`${columnToStart}-${rowToStart + i}`);
+          occupiedStorage.push(`${columnToStart}-${rowToStart + i}`);
+        }
+        const occupiedArr = columnOccupationLogic(tempOccupation);
+        for (let i = 0; i < occupiedArr.length; i++) {
+          emptyCells = emptyCells.filter((item) => item !== occupiedArr[i]);
+        }
+        isPlaced = true;
+      }
+    } else if (direction === 0) {
+      let indicator = false;
+      for (let i = 0; i < boat.boatLength; i++) {
+        if (
+          emptyCells.indexOf(`${columnToStart + i}-${rowToStart}`) > -1
+          && columnToStart + i < 10
+        ) {
+          indicator = true;
+        } else {
+          indicator = false;
+          break;
+        }
+      }
+      if (indicator) {
+        const tempOccupation = [];
+        for (let i = 0; i < boat.boatLength; i++) {
+          tempOccupation.push(`${columnToStart + i}-${rowToStart}`);
+          occupiedStorage.push(`${columnToStart + i}-${rowToStart}`);
+        }
+        const occupiedArr = rowOccupationLogic(tempOccupation);
+        for (let i = 0; i < occupiedArr.length; i++) {
+          emptyCells = emptyCells.filter((item) => item !== occupiedArr[i]);
+        }
+        isPlaced = true;
+      }
+    }
+  }
+}
+
+document.addEventListener('click', (event) => {
+  if (event.target.className.includes('battleship-cell-playable')) {
+    attack(event);
+  }
+});
