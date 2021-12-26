@@ -1,3 +1,4 @@
+import "../styles/style.scss";
 import { createBattleshipGrid } from "./battleshipGrid.js";
 import { countdownTimer } from "./infoPanel.js";
 import { generateEmptyCells } from "./battleshipGrid.js";
@@ -71,9 +72,6 @@ function onLoginFormSubmit(event) {
   shipsInitializer(boat1_2);
   shipsInitializer(boat1_3);
   shipsInitializer(boat1_4);
-  
-  // TODO - add user name to storage
-
 }
 
 
