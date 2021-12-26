@@ -40,16 +40,13 @@ export function createBattleshipGrid() {
 function attack(e) {
   reduceAmmo();
   updateAmmoProgressBar();
-  testInfo(e);
+  highlightHit(e);
 }
 
 let emptyCells = [];
 const occupiedStorage = [];
 
-function testInfo(e) {
-  // const testInfo = document.querySelectorAll('.battleship-cell-playable');
-
-  // let mapper = locatorStorage.filter(element => element === e.target.dataset.location);
+function highlightHit(e) {
   let mapper = occupiedStorage.filter(element => element === e.target.dataset.location);
   if (mapper.length) {
     e.target.style.backgroundColor = 'red';
