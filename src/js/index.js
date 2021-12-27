@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import '../styles/style.scss';
 import { createBattleshipGrid, generateEmptyCells, shipsInitializer } from './battleshipGrid';
-import { countdownTimer } from './infoPanel';
+import { startCountdownTimer } from './infoPanel';
 
 const boat4 = {
   boatLength: 4,
@@ -49,7 +49,6 @@ function loginButtonEnabler(event) {
 }
 
 function onLoginFormSubmit(event) {
-  countdownTimer();
   event.preventDefault();
   loginFormSelector.style.display = 'none';
   gameScreenSelector.style.display = 'block';
@@ -65,6 +64,7 @@ function onLoginFormSubmit(event) {
   shipsInitializer(boat1_2);
   shipsInitializer(boat1_3);
   shipsInitializer(boat1_4);
+  startCountdownTimer();
 }
 
 loginFormSelector.addEventListener('submit', onLoginFormSubmit);

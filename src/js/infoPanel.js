@@ -5,7 +5,7 @@ const ammoInfo = document.querySelector('.available-ammo');
 let availableAmmo = 30;
 let defaultAmmo = 0;
 
-export function countdownTimer() {
+export function startCountdownTimer() {
   const countDownDate = new Date(Date.now() + 15 * 60000);
   const timer = setInterval(() => {
     const now = new Date().getTime();
