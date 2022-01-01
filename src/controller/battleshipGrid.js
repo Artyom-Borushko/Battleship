@@ -1,7 +1,8 @@
 import BATTLESHIP_HEADERS from '../constants/battleshipHeaders';
+import boatsState from '../state/boatsState';
 
 let emptyCells = [];
-export const occupiedStorage = [];
+export const allBoatsCoordinates = [];
 
 const battleshipGrid = document.querySelector('.battleship-panel');
 
@@ -102,9 +103,15 @@ export function shipsInitializer(boat) {
         const tempOccupation = [];
         for (let i = 0; i < boat.boatLength; i++) {
           tempOccupation.push(`${columnToStart}-${rowToStart + i}`);
-          occupiedStorage.push(`${columnToStart}-${rowToStart + i}`);
+          allBoatsCoordinates.push(`${columnToStart}-${rowToStart + i}`);
         }
+
+        boatsState.push(boat);
+        boatsState[boatsState.length - 1].spawnCoordinates = tempOccupation;
         const occupiedArr = columnOccupationLogic(tempOccupation);
+        boatsState[boatsState.length - 1].occupiedCoordinates = occupiedArr
+          .filter((e) => !tempOccupation.includes(e));
+
         for (let i = 0; i < occupiedArr.length; i++) {
           emptyCells = emptyCells.filter((item) => item !== occupiedArr[i]);
         }
@@ -127,9 +134,15 @@ export function shipsInitializer(boat) {
         const tempOccupation = [];
         for (let i = 0; i < boat.boatLength; i++) {
           tempOccupation.push(`${columnToStart + i}-${rowToStart}`);
-          occupiedStorage.push(`${columnToStart + i}-${rowToStart}`);
+          allBoatsCoordinates.push(`${columnToStart + i}-${rowToStart}`);
         }
+
+        boatsState.push(boat);
+        boatsState[boatsState.length - 1].spawnCoordinates = tempOccupation;
         const occupiedArr = rowOccupationLogic(tempOccupation);
+        boatsState[boatsState.length - 1].occupiedCoordinates = occupiedArr
+          .filter((e) => !tempOccupation.includes(e));
+
         for (let i = 0; i < occupiedArr.length; i++) {
           emptyCells = emptyCells.filter((item) => item !== occupiedArr[i]);
         }

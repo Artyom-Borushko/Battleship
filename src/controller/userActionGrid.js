@@ -1,19 +1,34 @@
 import { reduceAmmo, updateAmmoProgressBar } from './infoPanel';
-import { occupiedStorage } from './battleshipGrid';
+import boatsState from '../state/boatsState';
 
-function highlightHit(e) {
-  const mapper = occupiedStorage.filter(
-    (element) => element === e.target.dataset.location,
-  );
-  if (mapper.length) {
-    e.target.style.backgroundColor = 'red';
+function validateAttack(e) {
+  for (let i = 0; i < boatsState.length; i++) {
+    const isHitSucceeded = boatsState[i].spawnCoordinates.filter(
+      (coordinate) => coordinate === e.target.dataset.location,
+    );
+    if (isHitSucceeded.length && boatsState[i].livesCount !== 0) {
+      boatsState[i].livesCount--;
+      e.target.style.backgroundColor = 'red';
+      e.target.classList.remove('battleship-cell-playable');
+      if (boatsState[i].livesCount === 0) {
+        for (let j = 0; j < boatsState[i].occupiedCoordinates.length; j++) {
+          const firstCoordinate = `${boatsState[i].occupiedCoordinates[j]}`.substring(0, `${boatsState[i].occupiedCoordinates[j]}`.indexOf('-'));
+          const secondCoordinate = `${boatsState[i].occupiedCoordinates[j]}`.substring(`${boatsState[i].occupiedCoordinates[j]}`.lastIndexOf('-') + 1);
+          const cellAroundSunkBoat = document.querySelector(`[data-location='${boatsState[i].occupiedCoordinates[j]}']`);
+          if (firstCoordinate < 11 && firstCoordinate > 0
+            && secondCoordinate < 11 && secondCoordinate > 0) {
+            cellAroundSunkBoat.style.backgroundColor = 'green';
+          }
+        }
+      }
+    }
   }
 }
 
 function attack(e) {
   reduceAmmo();
   updateAmmoProgressBar();
-  highlightHit(e);
+  validateAttack(e);
 }
 
 document.addEventListener('click', (event) => {

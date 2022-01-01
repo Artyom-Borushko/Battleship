@@ -1,33 +1,43 @@
 /* eslint-disable camelcase */
 const boat4 = {
   boatLength: 4,
+  livesCount: 4,
 };
 const boat3_1 = {
   boatLength: 3,
+  livesCount: 3,
 };
 const boat3_2 = {
   boatLength: 3,
+  livesCount: 3,
 };
 const boat2_1 = {
   boatLength: 2,
+  livesCount: 2,
 };
 const boat2_2 = {
   boatLength: 2,
+  livesCount: 2,
 };
 const boat2_3 = {
   boatLength: 2,
+  livesCount: 2,
 };
 const boat1_1 = {
   boatLength: 1,
+  livesCount: 1,
 };
 const boat1_2 = {
   boatLength: 1,
+  livesCount: 1,
 };
 const boat1_3 = {
   boatLength: 1,
+  livesCount: 1,
 };
 const boat1_4 = {
   boatLength: 1,
+  livesCount: 1,
 };
 
 export {
