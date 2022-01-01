@@ -1,8 +1,7 @@
-import { reduceAmmo, updateAmmoProgressBar } from './infoPanel';
+import BATTLESHIP_HEADERS from '../constants/battleshipHeaders';
 
-const cellHeaders = ['A', 'B', 'C', 'D', 'E', 'F', 'H', 'J', 'K', 'M'];
 let emptyCells = [];
-const occupiedStorage = [];
+export const occupiedStorage = [];
 
 const battleshipGrid = document.querySelector('.battleship-panel');
 
@@ -21,7 +20,7 @@ export function createBattleshipGrid() {
         cellDiv.appendChild(rowText);
       }
       if (column > 0 && row === 0) {
-        const cellText = document.createTextNode(cellHeaders[column - 1]);
+        const cellText = document.createTextNode(BATTLESHIP_HEADERS[column - 1]);
         cellDiv.appendChild(cellText);
       }
       if (column > 0 && row > 0) {
@@ -31,21 +30,6 @@ export function createBattleshipGrid() {
     }
     battleshipGrid.appendChild(columnDiv);
   }
-}
-
-function highlightHit(e) {
-  const mapper = occupiedStorage.filter(
-    (element) => element === e.target.dataset.location,
-  );
-  if (mapper.length) {
-    e.target.style.backgroundColor = 'red';
-  }
-}
-
-function attack(e) {
-  reduceAmmo();
-  updateAmmoProgressBar();
-  highlightHit(e);
 }
 
 function generateDirection() {
@@ -154,9 +138,3 @@ export function shipsInitializer(boat) {
     }
   }
 }
-
-document.addEventListener('click', (event) => {
-  if (event.target.className.includes('battleship-cell-playable')) {
-    attack(event);
-  }
-});

@@ -1,38 +1,11 @@
 /* eslint-disable camelcase */
-import '../styles/style.scss';
-import { createBattleshipGrid, generateEmptyCells, shipsInitializer } from './battleshipGrid';
-import { startCountdownTimer } from './infoPanel';
-
-const boat4 = {
-  boatLength: 4,
-};
-const boat3_1 = {
-  boatLength: 3,
-};
-const boat3_2 = {
-  boatLength: 3,
-};
-const boat2_1 = {
-  boatLength: 2,
-};
-const boat2_2 = {
-  boatLength: 2,
-};
-const boat2_3 = {
-  boatLength: 2,
-};
-const boat1_1 = {
-  boatLength: 1,
-};
-const boat1_2 = {
-  boatLength: 1,
-};
-const boat1_3 = {
-  boatLength: 1,
-};
-const boat1_4 = {
-  boatLength: 1,
-};
+import './styles/style.scss';
+import './controller/userActionGrid';
+import { createBattleshipGrid, generateEmptyCells, shipsInitializer } from './controller/battleshipGrid';
+import { startCountdownTimer } from './controller/infoPanel';
+import {
+  boat4, boat3_1, boat3_2, boat2_1, boat2_2, boat2_3, boat1_1, boat1_2, boat1_3, boat1_4,
+} from './constants/ships';
 
 const loginFormSelector = document.querySelector('#login-form');
 const nameInputSelector = document.querySelector('.name-input');
