@@ -1,4 +1,6 @@
 import { reduceAmmo, updateAmmoProgressBar } from './infoPanel';
+
+import { isAllBoatsSunk } from './endGameConditions';
 import boatsState from '../state/boatsState';
 
 function validateAttack(e) {
@@ -6,10 +8,14 @@ function validateAttack(e) {
     const isHitSucceeded = boatsState[i].spawnCoordinates.filter(
       (coordinate) => coordinate === e.target.dataset.location,
     );
+    if (!isHitSucceeded.length) {
+      e.target.style.backgroundColor = 'grey';
+    }
     if (isHitSucceeded.length && boatsState[i].livesCount !== 0) {
       boatsState[i].livesCount--;
       e.target.style.backgroundColor = 'red';
       e.target.classList.remove('battleship-cell-playable');
+
       if (boatsState[i].livesCount === 0) {
         for (let j = 0; j < boatsState[i].occupiedCoordinates.length; j++) {
           const firstCoordinate = `${boatsState[i].occupiedCoordinates[j]}`.substring(0, `${boatsState[i].occupiedCoordinates[j]}`.indexOf('-'));
@@ -18,9 +24,12 @@ function validateAttack(e) {
           if (firstCoordinate < 11 && firstCoordinate > 0
             && secondCoordinate < 11 && secondCoordinate > 0) {
             cellAroundSunkBoat.style.backgroundColor = 'green';
+            cellAroundSunkBoat.classList.remove('battleship-cell-playable');
           }
         }
       }
+      isAllBoatsSunk(e.target.dataset.location);
+      break;
     }
   }
 }

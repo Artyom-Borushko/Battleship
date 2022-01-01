@@ -2,6 +2,15 @@
 
 $fz: 40px;
 $form-margin: 50px;
+@mixin button {
+  background-color: #04AA6D;
+  color: white;
+  max-width: 200px;
+  border-radius: 10px;
+  line-height: 55px;
+  font-size: 25px;
+  width: 100%;
+}
 
 body {
   font-size: $fz;
@@ -43,13 +52,7 @@ body {
       margin-bottom: 20px;
     }
     .start-button {
-      background-color: #04AA6D;
-      color: white;
-      max-width: 200px;
-      border-radius: 10px;
-      line-height: 55px;
-      font-size: 25px;
-      width: 100%;
+      @include button;
     }
   }
 }
@@ -97,6 +100,42 @@ body {
           border-radius: inherit;
         }
       }
+    }
+  }
+}
+
+.end-game-screen {
+  display: none;
+  .end-game-screen-content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      margin-bottom: 30px;
+    }
+    .play-again-button {
+      @include button;
+    }
+  }
+  .end-game-table {
+    display: flex;
+    flex-direction: row;
+    max-width: 400px;
+    margin-bottom: 70px;
+    h3 {
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    p {
+      padding: 2px 0;
+    }
+    .end-game-table-name {
+      margin-right: 150px;
+    }
+    .end-game-table-shots {
+      margin-right: 50px;
     }
   }
 }

@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import './styles/style.scss';
-import './controller/userActionGrid';
 import { createBattleshipGrid, generateEmptyCells, shipsInitializer } from './controller/battleshipGrid';
 import { startCountdownTimer } from './controller/infoPanel';
 import {
@@ -21,7 +20,7 @@ function loginButtonEnabler(event) {
   }
 }
 
-function onLoginFormSubmit(event) {
+async function onLoginFormSubmit(event) {
   event.preventDefault();
   loginFormSelector.style.display = 'none';
   gameScreenSelector.style.display = 'block';
@@ -38,6 +37,7 @@ function onLoginFormSubmit(event) {
   shipsInitializer(boat1_3);
   shipsInitializer(boat1_4);
   startCountdownTimer();
+  await import('./controller/userActionGrid');
 }
 
 loginFormSelector.addEventListener('submit', onLoginFormSubmit);
