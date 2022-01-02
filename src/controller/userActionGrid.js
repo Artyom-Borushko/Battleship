@@ -1,7 +1,5 @@
-import {
-  reduceAmmo, increaseAmmoProgressBar, addAmmo, reduceAmmoProgressBar,
-} from './infoPanel';
-import { isAllBoatsSunk } from './endGameConditions';
+import { reduceAmmo, increaseAmmoProgressBar } from './infoPanel';
+import { isAllBoatsSunk, isAmmoOver } from './endGameConditions';
 import boatsState from '../state/boatsState';
 import { generateMissImage, generateMissImageAroundSunkBoat, generateHitImage } from './battleshipGrid';
 
@@ -11,15 +9,16 @@ function validateAttack(e) {
       (coordinate) => coordinate === e.target.dataset.location,
     );
     if (!isHitSucceeded.length && i === boatsState.length - 1) {
+      reduceAmmo();
+      increaseAmmoProgressBar();
       generateMissImage(e);
+      isAmmoOver();
       e.target.classList.remove('battleship-cell-playable');
     }
     if (isHitSucceeded.length && boatsState[i].livesCount !== 0) {
       boatsState[i].livesCount--;
       generateHitImage(e);
       e.target.classList.remove('battleship-cell-playable');
-      addAmmo();
-      reduceAmmoProgressBar();
       if (boatsState[i].livesCount === 0) {
         for (let j = 0; j < boatsState[i].occupiedCoordinates.length; j++) {
           const firstCoordinate = `${boatsState[i].occupiedCoordinates[j]}`.substring(0, `${boatsState[i].occupiedCoordinates[j]}`.indexOf('-'));
@@ -41,8 +40,6 @@ function validateAttack(e) {
 }
 
 function attack(e) {
-  reduceAmmo();
-  increaseAmmoProgressBar();
   validateAttack(e);
 }
 

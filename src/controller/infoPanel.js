@@ -25,22 +25,6 @@ export function startCountdownTimer() {
 export function reduceAmmo() {
   availableAmmo--;
   ammoInfo.innerHTML = `${availableAmmo}/30`;
-  if (availableAmmo <= 0) {
-    ammoInfo.innerHTML = 'EMPTY';
-    // TODO - implement end game logic
-  }
-}
-
-export function addAmmo() {
-  availableAmmo++;
-  ammoInfo.innerHTML = `${availableAmmo}/30`;
-}
-
-export function reduceAmmoProgressBar() {
-  defaultAmmo -= 5;
-  if (defaultAmmo <= 150) {
-    ammoProgressBar.style.width = `${defaultAmmo}px`;
-  }
 }
 
 export function increaseAmmoProgressBar() {

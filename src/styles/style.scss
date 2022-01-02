@@ -147,3 +147,14 @@ body {
     }
   }
 }
+
+.game-over-screen {
+  display: none;
+  .game-over-screen-content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
