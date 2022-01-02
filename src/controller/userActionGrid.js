@@ -1,22 +1,22 @@
 import {
   reduceAmmo, increaseAmmoProgressBar, addAmmo, reduceAmmoProgressBar,
 } from './infoPanel';
-
 import { isAllBoatsSunk } from './endGameConditions';
 import boatsState from '../state/boatsState';
+import { generateMissImage, generateMissImageAroundSunkBoat, generateHitImage } from './battleshipGrid';
 
 function validateAttack(e) {
   for (let i = 0; i < boatsState.length; i++) {
     const isHitSucceeded = boatsState[i].spawnCoordinates.filter(
       (coordinate) => coordinate === e.target.dataset.location,
     );
-    if (!isHitSucceeded.length) {
-      e.target.style.backgroundColor = 'grey';
+    if (!isHitSucceeded.length && i === boatsState.length - 1) {
+      generateMissImage(e);
       e.target.classList.remove('battleship-cell-playable');
     }
     if (isHitSucceeded.length && boatsState[i].livesCount !== 0) {
       boatsState[i].livesCount--;
-      e.target.style.backgroundColor = 'red';
+      generateHitImage(e);
       e.target.classList.remove('battleship-cell-playable');
       addAmmo();
       reduceAmmoProgressBar();
@@ -27,8 +27,10 @@ function validateAttack(e) {
           const cellAroundSunkBoat = document.querySelector(`[data-location='${boatsState[i].occupiedCoordinates[j]}']`);
           if (firstCoordinate < 11 && firstCoordinate > 0
             && secondCoordinate < 11 && secondCoordinate > 0) {
-            cellAroundSunkBoat.style.backgroundColor = 'green';
-            cellAroundSunkBoat.classList.remove('battleship-cell-playable');
+            if (cellAroundSunkBoat.getElementsByTagName('img').length === 0) {
+              generateMissImageAroundSunkBoat(cellAroundSunkBoat);
+              cellAroundSunkBoat.classList.remove('battleship-cell-playable');
+            }
           }
         }
       }

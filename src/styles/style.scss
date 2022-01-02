@@ -70,9 +70,17 @@ body {
     display: flex;
     min-width: 600px;
     margin-right: 50px;
+    // replace margin-bottom to correct property to center battleship panel
+    // margin-bottom: 500px;
+    margin-bottom: 50vh;
     div {
+      // min-height: 50px;
+      // flex: 1 0 50px;
+      // max-height: 50px;
       min-height: 50px;
-      flex: 1 0 50px;
+      min-width: 50px;
+      max-height: 50px;
+      max-width: 50px;
     }
     .battleship-cell {
       border: 1px solid black;

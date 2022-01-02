@@ -1,5 +1,7 @@
 import BATTLESHIP_HEADERS from '../constants/battleshipHeaders';
 import boatsState from '../state/boatsState';
+import missIcon from '../images/missIcon.png';
+import fireIcon from '../images/fireIcon.png';
 
 let emptyCells = [];
 export const allBoatsCoordinates = [];
@@ -38,7 +40,10 @@ function generateDirection() {
 }
 
 function generatePlaceToStart() {
-  const initialCoordinates = Math.round(Math.random() * emptyCells.length) + 1;
+  let initialCoordinates = Math.round(Math.random() * emptyCells.length) + 1;
+  while (initialCoordinates >= emptyCells.length) {
+    initialCoordinates = Math.round(Math.random() * emptyCells.length) + 1;
+  }
   return emptyCells[initialCoordinates];
 }
 
@@ -150,4 +155,28 @@ export function shipsInitializer(boat) {
       }
     }
   }
+}
+
+export function generateMissImage(e) {
+  const missIconImage = new Image();
+  missIconImage.src = missIcon;
+  e.target.appendChild(missIconImage);
+  missIconImage.style.maxWidth = '100%';
+  missIconImage.style.maxHeight = '100%';
+}
+
+export function generateMissImageAroundSunkBoat(cellAroundSunkBoat) {
+  const missIconImage = new Image();
+  missIconImage.src = missIcon;
+  cellAroundSunkBoat.appendChild(missIconImage);
+  missIconImage.style.maxWidth = '100%';
+  missIconImage.style.maxHeight = '100%';
+}
+
+export function generateHitImage(e) {
+  const fireIconImage = new Image();
+  fireIconImage.src = fireIcon;
+  e.target.appendChild(fireIconImage);
+  fireIconImage.style.maxWidth = '100%';
+  fireIconImage.style.maxHeight = '100%';
 }
