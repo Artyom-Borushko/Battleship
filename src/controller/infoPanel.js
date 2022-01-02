@@ -31,7 +31,19 @@ export function reduceAmmo() {
   }
 }
 
-export function updateAmmoProgressBar() {
+export function addAmmo() {
+  availableAmmo++;
+  ammoInfo.innerHTML = `${availableAmmo}/30`;
+}
+
+export function reduceAmmoProgressBar() {
+  defaultAmmo -= 5;
+  if (defaultAmmo <= 150) {
+    ammoProgressBar.style.width = `${defaultAmmo}px`;
+  }
+}
+
+export function increaseAmmoProgressBar() {
   defaultAmmo += 5;
   if (defaultAmmo <= 150) {
     ammoProgressBar.style.width = `${defaultAmmo}px`;
