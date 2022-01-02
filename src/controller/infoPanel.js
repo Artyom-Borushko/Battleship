@@ -1,3 +1,6 @@
+const gameScreen = document.querySelector('.game-screen');
+const gameOverScreen = document.querySelector('.game-over-screen');
+
 const ammoProgressBar = document.querySelector('.ammo-progress-bar-line');
 const countDownTimer = document.querySelector('.countdown-timer');
 const ammoInfo = document.querySelector('.available-ammo');
@@ -12,12 +15,15 @@ export function startCountdownTimer() {
     const distance = countDownDate - now;
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    countDownTimer.innerHTML = `${minutes}:${seconds}`;
-
+    if (seconds.toString().length < 2) {
+      countDownTimer.innerHTML = `${minutes}:0${seconds}`;
+    } else {
+      countDownTimer.innerHTML = `${minutes}:${seconds}`;
+    }
     if (distance < 0) {
       clearInterval(timer);
-      countDownTimer.innerHTML = 'EXPIRED';
-      // TODO - implement end game logic
+      gameScreen.style.display = 'none';
+      gameOverScreen.style.display = 'block';
     }
   }, 1000);
 }
