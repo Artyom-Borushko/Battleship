@@ -1,4 +1,5 @@
 import { allBoatsCoordinates } from './battleshipGrid';
+import generateEndGameScore from './score';
 
 const gameScreen = document.querySelector('.game-screen');
 const endGameScreen = document.querySelector('.end-game-screen');
@@ -13,6 +14,7 @@ export function isAllBoatsSunk(boatCoordinates) {
   if (!remainingBoatsCoordinates.length) {
     gameScreen.style.display = 'none';
     endGameScreen.style.display = 'block';
+    generateEndGameScore();
   }
 }
 

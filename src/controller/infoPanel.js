@@ -8,6 +8,16 @@ const ammoInfo = document.querySelector('.available-ammo');
 let availableAmmo = 30;
 let defaultAmmo = 0;
 
+function updateLocalStorageTime(timeLeft) {
+  const currentUserData = localStorage.getItem(localStorage.length);
+  const parsedUsedData = JSON.parse(currentUserData);
+  localStorage.setItem(localStorage.length, JSON.stringify({
+    name: parsedUsedData.name,
+    availableAmmo,
+    timeLeft,
+  }));
+}
+
 export function startCountdownTimer() {
   const countDownDate = new Date(Date.now() + 15 * 60000);
   const timer = setInterval(() => {
@@ -20,6 +30,7 @@ export function startCountdownTimer() {
     } else {
       countDownTimer.innerHTML = `${minutes}:${seconds}`;
     }
+    updateLocalStorageTime(distance);
     if (distance < 0) {
       clearInterval(timer);
       gameScreen.style.display = 'none';
@@ -28,9 +39,19 @@ export function startCountdownTimer() {
   }, 1000);
 }
 
+function updateLocalStorageAmmo() {
+  const currentUserData = localStorage.getItem(localStorage.length);
+  const parsedUsedData = JSON.parse(currentUserData);
+  localStorage.setItem(localStorage.length, JSON.stringify({
+    name: parsedUsedData.name,
+    availableAmmo,
+  }));
+}
+
 export function reduceAmmo() {
   availableAmmo--;
   ammoInfo.innerHTML = `${availableAmmo}/30`;
+  updateLocalStorageAmmo();
 }
 
 export function increaseAmmoProgressBar() {

@@ -20,8 +20,15 @@ function loginButtonEnabler(event) {
   }
 }
 
+function saveUserToLocalStorage() {
+  localStorage.setItem(localStorage.length + 1, JSON.stringify({
+    name: nameInputSelector.value,
+  }));
+}
+
 async function onLoginFormSubmit(event) {
   event.preventDefault();
+  saveUserToLocalStorage();
   loginFormSelector.style.display = 'none';
   gameScreenSelector.style.display = 'block';
   createBattleshipGrid();
