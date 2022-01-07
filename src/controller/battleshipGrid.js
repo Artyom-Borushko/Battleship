@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import BATTLESHIP_HEADERS from '../constants/battleshipHeaders';
 import boatsState from '../state/boatsState';
 import missIcon from '../images/missIcon.png';
@@ -161,16 +162,22 @@ export function generateMissImage(e) {
   const missIconImage = new Image();
   missIconImage.src = missIcon;
   e.target.appendChild(missIconImage);
-  missIconImage.style.maxWidth = '100%';
-  missIconImage.style.maxHeight = '100%';
+  e.target.style.display = 'flex';
+  e.target.style.justifyContent = 'center';
+  e.target.style.alignItems = 'center';
+  missIconImage.style.maxWidth = '80%';
+  missIconImage.style.maxHeight = '80%';
 }
 
 export function generateMissImageAroundSunkBoat(cellAroundSunkBoat) {
   const missIconImage = new Image();
   missIconImage.src = missIcon;
   cellAroundSunkBoat.appendChild(missIconImage);
-  missIconImage.style.maxWidth = '100%';
-  missIconImage.style.maxHeight = '100%';
+  cellAroundSunkBoat.style.display = 'flex';
+  cellAroundSunkBoat.style.justifyContent = 'center';
+  cellAroundSunkBoat.style.alignItems = 'center';
+  missIconImage.style.maxWidth = '80%';
+  missIconImage.style.maxHeight = '80%';
 }
 
 export function generateHitImage(e) {
