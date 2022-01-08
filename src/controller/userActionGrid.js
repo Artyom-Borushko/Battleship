@@ -1,10 +1,9 @@
-import { reduceAmmo, increaseAmmoProgressBar } from './infoPanel';
+import { reduceAmmo, increaseAmmoProgressBar, addFireIconToInfoPanelBoat } from './infoPanel';
 import { isAllBoatsSunk, isAmmoOver } from './endGameConditions';
 import boatsState from '../state/boatsState';
 import { generateMissImage, generateMissImageAroundSunkBoat, generateHitImage } from './battleshipGrid';
 
 function validateAttack(e) {
-  console.log(boatsState[0], 'this is boat state');
   for (let i = 0; i < boatsState.length; i++) {
     const isHitSucceeded = boatsState[i].spawnCoordinates.filter(
       (coordinate) => coordinate === e.target.dataset.location,
@@ -33,6 +32,7 @@ function validateAttack(e) {
             }
           }
         }
+        addFireIconToInfoPanelBoat(boatsState[i].id);
       }
       isAllBoatsSunk(e.target.dataset.location);
       break;

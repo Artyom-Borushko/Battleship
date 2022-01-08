@@ -34,15 +34,15 @@ async function onLoginFormSubmit(event) {
   createBattleshipGrid();
   generateEmptyCells();
   shipsInitializer(boat4);
-  // shipsInitializer(boat3_1);
-  // shipsInitializer(boat3_2);
-  // shipsInitializer(boat2_1);
-  // shipsInitializer(boat2_2);
-  // shipsInitializer(boat2_3);
-  // shipsInitializer(boat1_1);
-  // shipsInitializer(boat1_2);
-  // shipsInitializer(boat1_3);
-  // shipsInitializer(boat1_4);
+  shipsInitializer(boat3_1);
+  shipsInitializer(boat3_2);
+  shipsInitializer(boat2_1);
+  shipsInitializer(boat2_2);
+  shipsInitializer(boat2_3);
+  shipsInitializer(boat1_1);
+  shipsInitializer(boat1_2);
+  shipsInitializer(boat1_3);
+  shipsInitializer(boat1_4);
   startCountdownTimer();
   await import('./controller/userActionGrid');
 }

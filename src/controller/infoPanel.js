@@ -1,5 +1,6 @@
 /* eslint-disable import/no-mutable-exports */
 import generateEndGameScore from './score';
+import fireIcon from '../assets/icons/fireIcon.png';
 
 const gameScreen = document.querySelector('.game-screen');
 const endGameScreen = document.querySelector('.end-game-screen');
@@ -8,6 +9,17 @@ const endGameScreenHeader = document.querySelector('.end-game-header');
 const ammoProgressBar = document.querySelector('.ammo-progress-bar-line');
 const countDownTimer = document.querySelector('.countdown-timer');
 const ammoInfo = document.querySelector('.available-ammo');
+
+const fourCellShip = document.querySelector('.four-cell-ship');
+const firstThreeCellShip = document.querySelector('.first-three-cells-ship');
+const secondThreeCellShip = document.querySelector('.second-three-cells-ship');
+const firstTwoCellShip = document.querySelector('.first-two-cells-ship');
+const secondTwoCellShip = document.querySelector('.second-two-cells-ship');
+const thirdTwoCellShip = document.querySelector('.third-two-cells-ship');
+const firstOneCellShip = document.querySelector('.first-one-cell-ship');
+const secondOneCellShip = document.querySelector('.second-one-cell-ship');
+const thirdOneCellShip = document.querySelector('.third-one-cell-ship');
+const fourthOneCellShip = document.querySelector('.fourth-one-cell-ship');
 
 let availableAmmo = 30;
 let defaultAmmo = 0;
@@ -68,5 +80,56 @@ export function increaseAmmoProgressBar() {
   defaultAmmo += 5;
   if (defaultAmmo <= 150) {
     ammoProgressBar.style.width = `${defaultAmmo}px`;
+  }
+}
+
+function generateFireIconForInfoPanel() {
+  const fireIconImage = new Image();
+  fireIconImage.src = fireIcon;
+  fireIconImage.style.width = '70px';
+  fireIconImage.style.height = '70px';
+  fireIconImage.style.position = 'absolute';
+  fireIconImage.style.left = '50%';
+  fireIconImage.style.top = '50%';
+  fireIconImage.style.transform = 'translate(-50%, -50%)';
+  return fireIconImage;
+}
+
+export function addFireIconToInfoPanelBoat(id) {
+  const fireIconImage = generateFireIconForInfoPanel();
+
+  switch (id) {
+    case 1:
+      fourCellShip.appendChild(fireIconImage);
+      break;
+    case 2:
+      firstThreeCellShip.appendChild(fireIconImage);
+      break;
+    case 3:
+      secondThreeCellShip.appendChild(fireIconImage);
+      break;
+    case 4:
+      firstTwoCellShip.appendChild(fireIconImage);
+      break;
+    case 5:
+      secondTwoCellShip.appendChild(fireIconImage);
+      break;
+    case 6:
+      thirdTwoCellShip.appendChild(fireIconImage);
+      break;
+    case 7:
+      firstOneCellShip.appendChild(fireIconImage);
+      break;
+    case 8:
+      secondOneCellShip.appendChild(fireIconImage);
+      break;
+    case 9:
+      thirdOneCellShip.appendChild(fireIconImage);
+      break;
+    case 10:
+      fourthOneCellShip.appendChild(fireIconImage);
+      break;
+    default:
+      break;
   }
 }
