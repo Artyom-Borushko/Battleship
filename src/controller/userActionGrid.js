@@ -4,6 +4,7 @@ import boatsState from '../state/boatsState';
 import { generateMissImage, generateMissImageAroundSunkBoat, generateHitImage } from './battleshipGrid';
 
 function validateAttack(e) {
+  console.log(boatsState[0], 'this is boat state');
   for (let i = 0; i < boatsState.length; i++) {
     const isHitSucceeded = boatsState[i].spawnCoordinates.filter(
       (coordinate) => coordinate === e.target.dataset.location,

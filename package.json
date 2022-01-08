@@ -18,7 +18,9 @@
     "url": "https://github.com/Artyom-Borushko/Battleship/issues"
   },
   "homepage": "https://github.com/Artyom-Borushko/Battleship#readme",
-  "dependencies": {},
+  "dependencies": {
+    "html-loader": "^3.0.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "babel-loader": "^8.2.3",

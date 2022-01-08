@@ -20,56 +20,128 @@
     </form>
   </div>
 
-  <div class="game-screen">
-    <div class="game-screen-content">
-      <div class="battleship-panel">
-      </div>
+  <div class="container">
+    <div class="game-screen">
+      <div class="game-screen-content">
+        <div class="battleship-panel">
+        </div>
 
-      <div class="info-panel">
-        <div class="game-resources">
-          <div class="shots">
-            <p>Shots</p>
-            <p class="available-ammo">30/30</p>
-            <div class="ammo-progress-bar">
-              <div class="ammo-progress-bar-line"></div>
+        <div class="info-panel">
+          <div class="game-resources">
+            <div class="shots">
+              <p>Shots</p>
+              <p class="available-ammo">30/30</p>
+              <div class="ammo-progress-bar">
+                <div class="ammo-progress-bar-line"></div>
+              </div>
+            </div>
+            <p class="countdown-timer">15:00</p>
+          </div>
+
+          <div class="battleship-ships">
+
+            <div class="ships-4-cells">
+              <div class="four-cell-ships-wrapper">
+                <div class="four-cell-ship">
+                  <img class="four-cells-ship-image" src="./src/assets/shipsImages/4-cell-ship.png" alt="">
+                  <!-- <img class="test-fire-icon" src="./src/assets/icons/fireIcon.png" alt=""> -->
+                </div>
+                <div class="four-cell-ship-info">
+                  <div class="four-cell-ship-info-wrapper">
+                    <p>4 cells</p>
+                    <div class="test">
+                      <img class="ship-underline-icon" src="./src/assets/icons/shipUnderlineIcon.png" alt="">
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <div class="ships-3-cells">
+              <div class="three-cell-ships-wrapper">
+                <div class="first-three-cells-ship">
+                  <img class="three-cells-ship-image" src="./src/assets/shipsImages/3-cell-ship.png" alt="">
+                </div>
+                <div class="second-three-cells-ship">
+                  <img class="three-cells-ship-image" src="./src/assets/shipsImages/3-cell-ship.png" alt="">
+                </div>
+                <div class="three-cell-ships-info">
+                  <div class="three-cell-ships-info-wrapper">
+                    <p>3 cells</p>
+                    <img class="ship-underline-icon" src="./src/assets/icons/shipUnderlineIcon.png" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ships-2-cells">
+              <div class="two-cell-ships-wrapper">
+                <div class="first-two-cells-ship">
+                  <img class="two-cells-ship-image" src="./src/assets/shipsImages/2-cell-ship.png" alt="">
+                </div>
+                <div class="second-two-cells-ship">
+                  <img class="two-cells-ship-image" src="./src/assets/shipsImages/2-cell-ship.png" alt="">
+                </div>
+                <div class="third-two-cells-ship">
+                  <img class="two-cells-ship-image" src="./src/assets/shipsImages/2-cell-ship.png" alt="">
+                </div>
+                <div class="two-cell-ships-info">
+                  <div class="two-cell-ships-info-wrapper">
+                    <p>2 cells</p>
+                    <img class="ship-underline-icon" src="./src/assets/icons/shipUnderlineIcon.png" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ships-1-cell">
+              <div class="one-cell-ship-wrapper">
+                <div class="first-one-cell-ship">
+                  <img class="one-cell-ship-image" src="./src/assets/shipsImages/1-cell-ship.png" alt="">
+                </div>
+                <div class="second-one-cell-ship">
+                  <img class="one-cell-ship-image" src="./src/assets/shipsImages/1-cell-ship.png" alt="">
+                </div>
+                <div class="third-one-cell-ship">
+                  <img class="one-cell-ship-image" src="./src/assets/shipsImages/1-cell-ship.png" alt="">
+                </div>
+                <div class="fourth-one-cell-ship">
+                  <img class="one-cell-ship-image" src="./src/assets/shipsImages/1-cell-ship.png" alt="">
+                </div>
+                <div class="one-cell-ships-info">
+                  <div class="one-cell-ships-info-wrapper">
+                    <p>1 cell</p>
+                    <img class="ship-underline-icon" src="./src/assets/icons/shipUnderlineIcon.png" alt="">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <p class="countdown-timer">15:00</p>
-        </div>
-        <div class="4-cells">
-          4 cells
-        </div>
-        <div class="3-cells">
-          3 cells
-        </div>
-        <div class="2-cells">
-          2 cells
-        </div>
-        <div class="1-cells">
-          1 cell
+
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="end-game-screen">
-    <div class="end-game-screen-content">
-      <h2 class="end-game-header"></h2>
-      <div class="won-animation">
-        
+    <div class="end-game-screen">
+      <div class="end-game-screen-content">
+        <h2 class="end-game-header"></h2>
+        <div class="won-animation">
+          
+        </div>
+        <div class="end-game-table">
+          <div class="end-game-table-name">
+            <h3>Name</h3>
+          </div>
+          <div class="end-game-table-shots">
+            <h3>Shots</h3>
+          </div>
+          <div class="end-game-table-time">
+            <h3>Time</h3>
+          </div>
+        </div>
+      <input type="submit" class="play-again-button" value="Play again" />
       </div>
-      <div class="end-game-table">
-        <div class="end-game-table-name">
-          <h3>Name</h3>
-        </div>
-        <div class="end-game-table-shots">
-          <h3>Shots</h3>
-        </div>
-        <div class="end-game-table-time">
-          <h3>Time</h3>
-        </div>
-      </div>
-    <input type="submit" class="play-again-button" value="Play again" />
     </div>
   </div>
     

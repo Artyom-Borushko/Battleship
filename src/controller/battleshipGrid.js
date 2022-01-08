@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import BATTLESHIP_HEADERS from '../constants/battleshipHeaders';
 import boatsState from '../state/boatsState';
-import missIcon from '../images/missIcon.png';
-import fireIcon from '../images/fireIcon.png';
+import missIcon from '../assets/icons/missIcon.png';
+import fireIcon from '../assets/icons/fireIcon.png';
 
 let emptyCells = [];
 export const allBoatsCoordinates = [];

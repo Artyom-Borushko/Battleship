@@ -17,6 +17,11 @@ body {
   position: relative;
 }
 
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
 .form-popup {
   position: absolute;
   top: 50%;
@@ -96,11 +101,11 @@ body {
     .game-resources {
       display: flex;
       min-width: 300px;
-      justify-content: space-between;
       .ammo-progress-bar {
         min-width: 150px;
         border: 2px solid rgb(2, 2, 2);
         border-radius: 10% / 50%;
+        margin-right: 50px;
         .ammo-progress-bar-line {
           width: 0%;
           height: 15px;
@@ -109,6 +114,145 @@ body {
         }
       }
     }
+    .battleship-ships {
+      max-width: 600px;
+      .four-cell-ships-wrapper {
+        .four-cell-ship {
+          display: inline-block;
+          max-width: 50%;
+          // background-image: url('../assets/icons/fireIcon.png');
+          // z-index: 110;
+          position: relative;
+          .four-cells-ship-image {
+            max-width: 100%;
+          }
+          // for test
+          // .test-fire-icon {
+          //   width: 70px;
+          //   height: 70px;
+          //   position: absolute;
+          //   left: 40%;
+          //   top: 30%;
+          //   z-index: 220;
+          // }
+        }
+        .four-cell-ship-info {
+          max-width: 50%;
+          .four-cell-ship-info-wrapper {
+            p {
+              text-align: center;
+            }
+            .ship-underline-icon {
+              max-width: 100%;
+            } 
+          }
+        }
+      }
+      .three-cell-ships-wrapper {
+        .first-three-cells-ship {
+          display: inline-block;
+          max-width: 40%;
+          .three-cells-ship-image {
+            max-width: 100%;
+          }
+        }
+        .second-three-cells-ship {
+          display: inline-block;
+          max-width: 40%;
+          .three-cells-ship-image {
+            max-width: 100%;
+          }
+        }
+        .three-cell-ships-info {
+          max-width: 40%;
+          .three-cell-ships-info-wrapper {
+            p {
+              text-align: center;
+            }
+            .ship-underline-icon {
+              max-width: 100%;
+            }
+          }
+        }
+        
+      }
+      .two-cell-ships-wrapper {
+        .first-two-cells-ship {
+          display: inline-block;
+          max-width: 30%;
+          .two-cells-ship-image {
+            max-width: 100%;
+          }
+        }
+        .second-two-cells-ship {
+          display: inline-block;
+          max-width: 30%;
+          .two-cells-ship-image {
+            max-width: 100%;
+          }
+        }
+        .third-two-cells-ship {
+          display: inline-block;
+          max-width: 30%;
+          .two-cells-ship-image {
+            max-width: 100%;
+          }
+        }
+        .two-cell-ships-info {
+          max-width: 30%;
+          .two-cell-ships-info-wrapper {
+            p {
+              text-align: center;
+            }
+            .ship-underline-icon {
+              max-width: 100%;
+            }
+          }
+        }
+      }
+      .one-cell-ship-wrapper {
+        .first-one-cell-ship {
+          display: inline-block;
+          max-width: 20%;
+          .one-cell-ship-image {
+            max-width: 100%;
+          }
+        }
+        .second-one-cell-ship {
+          display: inline-block;
+          max-width: 20%;
+          .one-cell-ship-image {
+            max-width: 100%;
+          }
+        }
+        .third-one-cell-ship {
+          display: inline-block;
+          max-width: 20%;
+          .one-cell-ship-image {
+            max-width: 100%;
+          }
+        }
+        .fourth-one-cell-ship {
+          display: inline-block;
+          max-width: 20%;
+          .one-cell-ship-image {
+            max-width: 100%;
+          }
+        }
+        .one-cell-ships-info {
+          max-width: 20%;
+          .one-cell-ships-info-wrapper {
+            p {
+              text-align: center;
+            }
+            .ship-underline-icon {
+              max-width: 100%;
+            }
+          }
+        }
+      }
+    }
+    
   }
 }
 
