@@ -1,7 +1,9 @@
 @import "./nullstyle.scss";
 
 $fz: 40px;
-$form-margin: 50px;
+$formMargin: 50px;
+$maxShipImageWidth: 100%;
+
 @mixin button {
   background-color: #04AA6D;
   color: white;
@@ -10,6 +12,21 @@ $form-margin: 50px;
   line-height: 55px;
   font-size: 25px;
   width: 100%;
+}
+
+@mixin ship ($maxWidthValue) {
+  display: inline-block;
+  max-width: $maxWidthValue;
+  position: relative;
+}
+
+@mixin infoPanelShipDecoration {
+  p {
+    text-align: center;
+  }
+  .ship-underline-icon {
+    max-width: 100%;
+  }
 }
 
 body {
@@ -29,7 +46,7 @@ body {
   transform: translate(-50%,-50%);
   h1 {
       font-size: $fz+20px;
-      margin-bottom: $form-margin;
+      margin-bottom: $formMargin;
       font-weight: 500;
       text-align: center;
     };
@@ -48,7 +65,7 @@ body {
       opacity: 0.7;
       background: #f1f1f1;
       padding: 15px;
-      margin-bottom: $form-margin;
+      margin-bottom: $formMargin;
     }
     .name-input:focus {
       background-color: #ddd;
@@ -118,150 +135,98 @@ body {
       max-width: 600px;
       .four-cell-ships-wrapper {
         .four-cell-ship {
-          display: inline-block;
-          max-width: 50%;
-          // background-image: url('../assets/icons/fireIcon.png');
-          // z-index: 110;
-          position: relative;
+          @include ship(50%);
           .four-cells-ship-image {
-            max-width: 100%;
+            max-width: $maxShipImageWidth;
           }
-          // for test
-          // .test-fire-icon {
-          //   width: 70px;
-          //   height: 70px;
-          //   position: absolute;
-          //   left: 40%;
-          //   top: 30%;
-          //   z-index: 220;
-          // }
         }
         .four-cell-ship-info {
           max-width: 50%;
           .four-cell-ship-info-wrapper {
-            p {
-              text-align: center;
-            }
-            .ship-underline-icon {
-              max-width: 100%;
-            } 
+            @include infoPanelShipDecoration;
           }
         }
       }
       .three-cell-ships-wrapper {
         .first-three-cells-ship {
-          display: inline-block;
-          max-width: 40%;
-          position: relative;
+          @include ship(40%);
           .three-cells-ship-image {
-            max-width: 100%;
+            max-width: $maxShipImageWidth;
           }
         }
         .second-three-cells-ship {
-          display: inline-block;
-          max-width: 40%;
-          position: relative;
+          @include ship(40%);
           .three-cells-ship-image {
-            max-width: 100%;
+            max-width: $maxShipImageWidth;
           }
         }
         .three-cell-ships-info {
           max-width: 40%;
           .three-cell-ships-info-wrapper {
-            p {
-              text-align: center;
-            }
-            .ship-underline-icon {
-              max-width: 100%;
-            }
+            @include infoPanelShipDecoration;
           }
         }
         
       }
       .two-cell-ships-wrapper {
         .first-two-cells-ship {
-          display: inline-block;
-          max-width: 30%;
-          position: relative;
+          @include ship(30%);
           .two-cells-ship-image {
-            max-width: 100%;
+            max-width: $maxShipImageWidth;
           }
         }
         .second-two-cells-ship {
-          display: inline-block;
-          max-width: 30%;
-          position: relative;
+          @include ship(30%);
           .two-cells-ship-image {
-            max-width: 100%;
+            max-width: $maxShipImageWidth;
           }
         }
         .third-two-cells-ship {
-          display: inline-block;
-          max-width: 30%;
-          position: relative;
+          @include ship(30%);
           .two-cells-ship-image {
-            max-width: 100%;
+            max-width: $maxShipImageWidth;
           }
         }
         .two-cell-ships-info {
           max-width: 30%;
           .two-cell-ships-info-wrapper {
-            p {
-              text-align: center;
-            }
-            .ship-underline-icon {
-              max-width: 100%;
-            }
+            @include infoPanelShipDecoration;
           }
         }
       }
       .one-cell-ship-wrapper {
         .first-one-cell-ship {
-          display: inline-block;
-          max-width: 20%;
-          position: relative;
+          @include ship(20%);
           .one-cell-ship-image {
-            max-width: 100%;
+            max-width: $maxShipImageWidth;
           }
         }
         .second-one-cell-ship {
-          display: inline-block;
-          max-width: 20%;
-          position: relative;
+          @include ship(20%);
           .one-cell-ship-image {
-            max-width: 100%;
+            max-width: $maxShipImageWidth;
           }
         }
         .third-one-cell-ship {
-          display: inline-block;
-          max-width: 20%;
-          position: relative;
+          @include ship(20%);
           .one-cell-ship-image {
-            max-width: 100%;
+            max-width: $maxShipImageWidth;
           }
         }
         .fourth-one-cell-ship {
-          display: inline-block;
-          max-width: 20%;
-          position: relative;
+          @include ship(20%);
           .one-cell-ship-image {
-            max-width: 100%;
+            max-width: $maxShipImageWidth;
           }
         }
         .one-cell-ships-info {
           max-width: 20%;
           .one-cell-ships-info-wrapper {
-            p {
-              text-align: center;
-            }
-            .ship-underline-icon {
-              max-width: 100%;
-            }
+            @include infoPanelShipDecoration;
           }
         }
       }
-    }
-    
+    } 
   }
 }
 
