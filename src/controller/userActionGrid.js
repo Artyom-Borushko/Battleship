@@ -1,7 +1,10 @@
 import { reduceAmmo, increaseAmmoProgressBar, addFireIconToInfoPanelBoat } from './infoPanel';
 import { isAllBoatsSunk, isAmmoOver } from './endGameConditions';
 import boatsState from '../state/boatsState';
-import { generateMissImage, generateMissImageAroundSunkBoat, generateHitImage } from './battleshipGrid';
+import {
+  generateMissImage, generateMissImageAroundSunkBoat, generateHitImage,
+  addSunkBoatImageToBattleship,
+} from './battleshipGrid';
 
 const playAgainButton = document.querySelector('.play-again-button');
 
@@ -35,6 +38,7 @@ function validateAttack(e) {
           }
         }
         addFireIconToInfoPanelBoat(boatsState[i].id);
+        addSunkBoatImageToBattleship(boatsState[i]);
       }
       isAllBoatsSunk(e.target.dataset.location);
       break;

@@ -3,6 +3,10 @@ import BATTLESHIP_HEADERS from '../constants/battleshipHeaders';
 import boatsState from '../state/boatsState';
 import missIcon from '../assets/icons/missIcon.png';
 import fireIcon from '../assets/icons/fireIcon.png';
+import fourCellShipImage from '../assets/shipsImages/4-cell-ship.png';
+import threeCellShipImage from '../assets/shipsImages/3-cell-ship.png';
+import twoCellShipImage from '../assets/shipsImages/2-cell-ship.png';
+import oneCellShipImage from '../assets/shipsImages/1-cell-ship.png';
 
 let emptyCells = [];
 export const allBoatsCoordinates = [];
@@ -117,6 +121,7 @@ export function shipsInitializer(boat) {
         const occupiedArr = columnOccupationLogic(tempOccupation);
         boatsState[boatsState.length - 1].occupiedCoordinates = occupiedArr
           .filter((e) => !tempOccupation.includes(e));
+        boatsState[boatsState.length - 1].direction = direction;
 
         for (let i = 0; i < occupiedArr.length; i++) {
           emptyCells = emptyCells.filter((item) => item !== occupiedArr[i]);
@@ -148,6 +153,7 @@ export function shipsInitializer(boat) {
         const occupiedArr = rowOccupationLogic(tempOccupation);
         boatsState[boatsState.length - 1].occupiedCoordinates = occupiedArr
           .filter((e) => !tempOccupation.includes(e));
+        boatsState[boatsState.length - 1].direction = direction;
 
         for (let i = 0; i < occupiedArr.length; i++) {
           emptyCells = emptyCells.filter((item) => item !== occupiedArr[i]);
@@ -184,6 +190,87 @@ export function generateHitImage(e) {
   const fireIconImage = new Image();
   fireIconImage.src = fireIcon;
   e.target.appendChild(fireIconImage);
+  e.target.style.position = 'relative';
   fireIconImage.style.maxWidth = '100%';
   fireIconImage.style.maxHeight = '100%';
+  fireIconImage.style.position = 'absolute';
+  fireIconImage.style.zIndex = 100;
+  fireIconImage.style.left = '50%';
+  fireIconImage.style.top = '50%';
+  fireIconImage.style.transform = 'translate(-50%, -50%)';
+}
+
+function generateSunkBoatImage(boatLength, shipLocator) {
+  const sunkBoatImage = new Image();
+  if (boatLength === 4) sunkBoatImage.src = fourCellShipImage;
+  else if (boatLength === 3) sunkBoatImage.src = threeCellShipImage;
+  else if (boatLength === 2) sunkBoatImage.src = twoCellShipImage;
+  else sunkBoatImage.src = oneCellShipImage;
+
+  shipLocator.style.position = 'relative';
+  sunkBoatImage.style.width = `${boatLength * 50}px`;
+  sunkBoatImage.style.height = '50px';
+  sunkBoatImage.style.position = 'absolute';
+  sunkBoatImage.style.top = '0';
+  sunkBoatImage.style.left = '0';
+  sunkBoatImage.style.zIndex = 90;
+  return sunkBoatImage;
+}
+
+export function addSunkBoatImageToBattleship({
+  spawnCoordinates, id, direction, boatLength,
+}) {
+  const sunkShipLocator = document.querySelector(`[data-location='${spawnCoordinates[0]}']`);
+  const sunkBoatImage = generateSunkBoatImage(boatLength, sunkShipLocator);
+
+  if (direction === 1) {
+    switch (id) {
+      case 1:
+        sunkShipLocator.appendChild(sunkBoatImage);
+        sunkBoatImage.style.transform = 'rotate(90deg) translateY(75px) translateX(75px)';
+        break;
+      case 2:
+      case 3:
+        sunkShipLocator.appendChild(sunkBoatImage);
+        sunkBoatImage.style.transform = 'rotate(90deg) translateY(50px) translateX(50px)';
+        break;
+      case 4:
+      case 5:
+      case 6:
+        sunkShipLocator.appendChild(sunkBoatImage);
+        sunkBoatImage.style.transform = 'rotate(90deg) translateY(25px) translateX(25px)';
+        break;
+      case 7:
+      case 8:
+      case 9:
+      case 10:
+        sunkShipLocator.appendChild(sunkBoatImage);
+        break;
+      default:
+        break;
+    }
+  } else {
+    switch (id) {
+      case 1:
+        sunkShipLocator.appendChild(sunkBoatImage);
+        break;
+      case 2:
+      case 3:
+        sunkShipLocator.appendChild(sunkBoatImage);
+        break;
+      case 4:
+      case 5:
+      case 6:
+        sunkShipLocator.appendChild(sunkBoatImage);
+        break;
+      case 7:
+      case 8:
+      case 9:
+      case 10:
+        sunkShipLocator.appendChild(sunkBoatImage);
+        break;
+      default:
+        break;
+    }
+  }
 }
