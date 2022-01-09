@@ -167,37 +167,25 @@ export function shipsInitializer(boat) {
 export function generateMissImage(e) {
   const missIconImage = new Image();
   missIconImage.src = missIcon;
+  e.target.classList.add('miss-image-container');
+  missIconImage.classList.add('miss-image');
   e.target.appendChild(missIconImage);
-  e.target.style.display = 'flex';
-  e.target.style.justifyContent = 'center';
-  e.target.style.alignItems = 'center';
-  missIconImage.style.maxWidth = '80%';
-  missIconImage.style.maxHeight = '80%';
 }
 
 export function generateMissImageAroundSunkBoat(cellAroundSunkBoat) {
   const missIconImage = new Image();
   missIconImage.src = missIcon;
+  cellAroundSunkBoat.classList.add('miss-image-container');
+  missIconImage.classList.add('miss-image');
   cellAroundSunkBoat.appendChild(missIconImage);
-  cellAroundSunkBoat.style.display = 'flex';
-  cellAroundSunkBoat.style.justifyContent = 'center';
-  cellAroundSunkBoat.style.alignItems = 'center';
-  missIconImage.style.maxWidth = '80%';
-  missIconImage.style.maxHeight = '80%';
 }
 
 export function generateHitImage(e) {
   const fireIconImage = new Image();
   fireIconImage.src = fireIcon;
-  e.target.appendChild(fireIconImage);
   e.target.style.position = 'relative';
-  fireIconImage.style.maxWidth = '100%';
-  fireIconImage.style.maxHeight = '100%';
-  fireIconImage.style.position = 'absolute';
-  fireIconImage.style.zIndex = 100;
-  fireIconImage.style.left = '50%';
-  fireIconImage.style.top = '50%';
-  fireIconImage.style.transform = 'translate(-50%, -50%)';
+  fireIconImage.classList.add('hit-image');
+  e.target.appendChild(fireIconImage);
 }
 
 function generateSunkBoatImage(boatLength, shipLocator) {
@@ -206,14 +194,9 @@ function generateSunkBoatImage(boatLength, shipLocator) {
   else if (boatLength === 3) sunkBoatImage.src = threeCellShipImage;
   else if (boatLength === 2) sunkBoatImage.src = twoCellShipImage;
   else sunkBoatImage.src = oneCellShipImage;
-
   shipLocator.style.position = 'relative';
   sunkBoatImage.style.width = `${boatLength * 50}px`;
-  sunkBoatImage.style.height = '50px';
-  sunkBoatImage.style.position = 'absolute';
-  sunkBoatImage.style.top = '0';
-  sunkBoatImage.style.left = '0';
-  sunkBoatImage.style.zIndex = 90;
+  sunkBoatImage.classList.add('sunk-boat-image');
   return sunkBoatImage;
 }
 
@@ -240,37 +223,11 @@ export function addSunkBoatImageToBattleship({
         sunkShipLocator.appendChild(sunkBoatImage);
         sunkBoatImage.style.transform = 'rotate(90deg) translateY(25px) translateX(25px)';
         break;
-      case 7:
-      case 8:
-      case 9:
-      case 10:
-        sunkShipLocator.appendChild(sunkBoatImage);
-        break;
       default:
+        sunkShipLocator.appendChild(sunkBoatImage);
         break;
     }
   } else {
-    switch (id) {
-      case 1:
-        sunkShipLocator.appendChild(sunkBoatImage);
-        break;
-      case 2:
-      case 3:
-        sunkShipLocator.appendChild(sunkBoatImage);
-        break;
-      case 4:
-      case 5:
-      case 6:
-        sunkShipLocator.appendChild(sunkBoatImage);
-        break;
-      case 7:
-      case 8:
-      case 9:
-      case 10:
-        sunkShipLocator.appendChild(sunkBoatImage);
-        break;
-      default:
-        break;
-    }
+    sunkShipLocator.appendChild(sunkBoatImage);
   }
 }
