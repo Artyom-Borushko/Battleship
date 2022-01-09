@@ -3,6 +3,8 @@ import { isAllBoatsSunk, isAmmoOver } from './endGameConditions';
 import boatsState from '../state/boatsState';
 import { generateMissImage, generateMissImageAroundSunkBoat, generateHitImage } from './battleshipGrid';
 
+const playAgainButton = document.querySelector('.play-again-button');
+
 function validateAttack(e) {
   for (let i = 0; i < boatsState.length; i++) {
     const isHitSucceeded = boatsState[i].spawnCoordinates.filter(
@@ -49,3 +51,9 @@ document.addEventListener('click', (event) => {
     attack(event);
   }
 });
+
+function playAgain() {
+  window.location.reload();
+}
+
+playAgainButton.addEventListener('click', playAgain);
