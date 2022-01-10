@@ -91,12 +91,7 @@ export function increaseAmmoProgressBar() {
 function generateFireIconForInfoPanel() {
   const fireIconImage = new Image();
   fireIconImage.src = fireIcon;
-  fireIconImage.style.maxWidth = '100%';
-  fireIconImage.style.maxHeight = '100%';
-  fireIconImage.style.position = 'absolute';
-  fireIconImage.style.left = '50%';
-  fireIconImage.style.top = '50%';
-  fireIconImage.style.transform = 'translate(-50%, -50%)';
+  fireIconImage.classList.add('hit-image');
   return fireIconImage;
 }
 
