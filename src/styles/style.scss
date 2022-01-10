@@ -24,6 +24,7 @@ $maxShipImageWidth: 100%;
 @mixin infoPanelShipDecoration {
   p {
     text-align: center;
+    font-size: $fz/2;
   }
   .ship-underline-icon {
     max-width: 100%;
@@ -38,6 +39,7 @@ body {
 .container {
   margin: 0 auto;
   max-width: 1200px;
+  height: 100%;
 }
 
 .form-popup {
@@ -95,14 +97,9 @@ body {
   .battleship-panel {
     display: flex;
     min-width: 600px;
+    min-height: 600px;
     margin-right: 50px;
-    // replace margin-bottom to correct property to center battleship panel
-    // margin-bottom: 500px;
-    margin-bottom: 50vh;
     div {
-      // min-height: 50px;
-      // flex: 1 0 50px;
-      // max-height: 50px;
       min-height: 50px;
       min-width: 50px;
       max-height: 50px;
