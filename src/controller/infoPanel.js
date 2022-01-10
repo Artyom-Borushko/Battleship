@@ -81,13 +81,18 @@ export function increaseAmmoProgressBar() {
   if (defaultAmmo <= 150) {
     ammoProgressBar.style.width = `${defaultAmmo}px`;
   }
+  if (defaultAmmo >= 145 && defaultAmmo <= 150) {
+    ammoProgressBar.style.borderBottomRightRadius = '20px';
+    ammoProgressBar.style.borderTopRightRadius = '20px';
+    ammoProgressBar.style.width = `${defaultAmmo}px`;
+  }
 }
 
 function generateFireIconForInfoPanel() {
   const fireIconImage = new Image();
   fireIconImage.src = fireIcon;
-  fireIconImage.style.width = '70px';
-  fireIconImage.style.height = '70px';
+  fireIconImage.style.maxWidth = '100%';
+  fireIconImage.style.maxHeight = '100%';
   fireIconImage.style.position = 'absolute';
   fireIconImage.style.left = '50%';
   fireIconImage.style.top = '50%';
