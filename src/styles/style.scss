@@ -122,16 +122,24 @@ body {
     .game-resources {
       display: flex;
       min-width: 300px;
+      margin-bottom: 30px;
       .ammo-progress-bar {
         min-width: 150px;
-        border: 2px solid rgb(2, 2, 2);
-        border-radius: 10% / 50%;
+        background-color: rgb(221, 221, 221);
+        border-radius: 10px;
+        line-height: 1.5;
+        height: 15px;
         margin-right: 50px;
         .ammo-progress-bar-line {
-          width: 0%;
-          height: 15px;
+          width: 0;
+          height: 100%;
           background-color: rgb(243, 131, 131);
-          border-radius: inherit;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          border-top-left-radius: 20px;
+          border-bottom-left-radius: 20px;
+          overflow: hidden;
+          line-height: inherit;
         }
       }
     }
