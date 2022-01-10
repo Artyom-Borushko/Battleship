@@ -167,6 +167,7 @@ export function shipsInitializer(boat) {
 export function generateMissImage(e) {
   const missIconImage = new Image();
   missIconImage.src = missIcon;
+  e.target.style.position = 'relative';
   e.target.classList.add('miss-image-container');
   missIconImage.classList.add('miss-image');
   e.target.appendChild(missIconImage);
@@ -175,6 +176,7 @@ export function generateMissImage(e) {
 export function generateMissImageAroundSunkBoat(cellAroundSunkBoat) {
   const missIconImage = new Image();
   missIconImage.src = missIcon;
+  cellAroundSunkBoat.style.position = 'relative';
   cellAroundSunkBoat.classList.add('miss-image-container');
   missIconImage.classList.add('miss-image');
   cellAroundSunkBoat.appendChild(missIconImage);

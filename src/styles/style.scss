@@ -97,13 +97,11 @@ body {
   .battleship-panel {
     display: flex;
     min-width: 600px;
-    min-height: 600px;
+    min-height: 500px;
     margin-right: 50px;
     div {
       min-height: 50px;
       min-width: 50px;
-      max-height: 50px;
-      max-width: 50px;
     }
     .battleship-cell {
       border: 1px solid black;
@@ -116,10 +114,12 @@ body {
   .info-panel {
     display: flex;
     flex-direction: column;
+    min-height: 500px;
     .game-resources {
       display: flex;
       min-width: 300px;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      margin-top: -100px;
       .ammo-progress-bar {
         min-width: 150px;
         background-color: rgb(221, 221, 221);
@@ -141,7 +141,7 @@ body {
       }
     }
     .battleship-ships {
-      max-width: 600px;
+      max-width: 500px;
       .four-cell-ships-wrapper {
         .four-cell-ship {
           @include ship(50%);
@@ -294,11 +294,12 @@ body {
 }
 
 .miss-image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   .miss-image {
     max-width: 80%;
     max-height: 80%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%)
   }
 }
