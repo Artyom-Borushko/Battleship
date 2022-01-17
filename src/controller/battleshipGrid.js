@@ -202,25 +202,22 @@ function generateSunkBoatImage(boatLength, shipLocator) {
 }
 
 export function addSunkBoatImageToBattleship({
-  spawnCoordinates, id, direction, boatLength,
+  spawnCoordinates, direction, boatLength,
 }) {
   const sunkShipLocator = document.querySelector(`[data-location='${spawnCoordinates[0]}']`);
   const sunkBoatImage = generateSunkBoatImage(boatLength, sunkShipLocator);
 
   if (direction === 1) {
-    switch (id) {
-      case 1:
+    switch (boatLength) {
+      case 4:
         sunkShipLocator.appendChild(sunkBoatImage);
         sunkBoatImage.style.transform = 'rotate(90deg) translateY(75px) translateX(75px)';
         break;
-      case 2:
       case 3:
         sunkShipLocator.appendChild(sunkBoatImage);
         sunkBoatImage.style.transform = 'rotate(90deg) translateY(50px) translateX(50px)';
         break;
-      case 4:
-      case 5:
-      case 6:
+      case 2:
         sunkShipLocator.appendChild(sunkBoatImage);
         sunkBoatImage.style.transform = 'rotate(90deg) translateY(25px) translateX(25px)';
         break;

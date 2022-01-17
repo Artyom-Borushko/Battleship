@@ -36,7 +36,7 @@ function validateAttack(e) {
             }
           }
         }
-        addFireIconToInfoPanelBoat(boatsState[i].id);
+        addFireIconToInfoPanelBoat(boatsState[i].boatLength);
         addSunkBoatImageToBattleship(boatsState[i]);
       }
       isAllBoatsSunk(e.target.dataset.location);

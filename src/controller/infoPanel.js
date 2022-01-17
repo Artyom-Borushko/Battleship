@@ -82,41 +82,37 @@ function generateFireIconForInfoPanel() {
   return fireIconImage;
 }
 
-export function addFireIconToInfoPanelBoat(id) {
+export function addFireIconToInfoPanelBoat(boatLength) {
   const fireIconImage = generateFireIconForInfoPanel();
 
-  switch (id) {
-    case 1:
-      fourCellShip.appendChild(fireIconImage);
-      break;
-    case 2:
+  if (boatLength === 4) {
+    fourCellShip.appendChild(fireIconImage);
+  }
+  if (boatLength === 3) {
+    if (firstThreeCellShip.getElementsByTagName('img').length !== 2) {
       firstThreeCellShip.appendChild(fireIconImage);
-      break;
-    case 3:
+    } else {
       secondThreeCellShip.appendChild(fireIconImage);
-      break;
-    case 4:
+    }
+  }
+  if (boatLength === 2) {
+    if (firstTwoCellShip.getElementsByTagName('img').length !== 2) {
       firstTwoCellShip.appendChild(fireIconImage);
-      break;
-    case 5:
+    } else if (secondTwoCellShip.getElementsByTagName('img').length !== 2) {
       secondTwoCellShip.appendChild(fireIconImage);
-      break;
-    case 6:
+    } else {
       thirdTwoCellShip.appendChild(fireIconImage);
-      break;
-    case 7:
+    }
+  }
+  if (boatLength === 1) {
+    if (firstOneCellShip.getElementsByTagName('img').length !== 2) {
       firstOneCellShip.appendChild(fireIconImage);
-      break;
-    case 8:
+    } else if (secondOneCellShip.getElementsByTagName('img').length !== 2) {
       secondOneCellShip.appendChild(fireIconImage);
-      break;
-    case 9:
+    } else if (thirdOneCellShip.getElementsByTagName('img').length !== 2) {
       thirdOneCellShip.appendChild(fireIconImage);
-      break;
-    case 10:
+    } else {
       fourthOneCellShip.appendChild(fireIconImage);
-      break;
-    default:
-      break;
+    }
   }
 }

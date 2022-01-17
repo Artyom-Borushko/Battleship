@@ -1,10 +1,7 @@
-/* eslint-disable camelcase */
 import './styles/style.scss';
 import { createBattleshipGrid, generateEmptyCells, shipsInitializer } from './controller/battleshipGrid';
 import { startCountdownTimer } from './controller/infoPanel';
-import {
-  boat4, boat3_1, boat3_2, boat2_1, boat2_2, boat2_3, boat1_1, boat1_2, boat1_3, boat1_4,
-} from './constants/ships';
+import shipBuilder from './utils/shipBuilder';
 import {
   loginFormSelector, nameInputSelector, startButtonSelector, gameScreen,
 } from './constants/querySelectors';
@@ -31,16 +28,16 @@ async function onLoginFormSubmit(event) {
   gameScreen.style.display = 'block';
   createBattleshipGrid();
   generateEmptyCells();
-  shipsInitializer(boat4);
-  shipsInitializer(boat3_1);
-  shipsInitializer(boat3_2);
-  shipsInitializer(boat2_1);
-  shipsInitializer(boat2_2);
-  shipsInitializer(boat2_3);
-  shipsInitializer(boat1_1);
-  shipsInitializer(boat1_2);
-  shipsInitializer(boat1_3);
-  shipsInitializer(boat1_4);
+  shipsInitializer(shipBuilder(4));
+  shipsInitializer(shipBuilder(3));
+  shipsInitializer(shipBuilder(3));
+  shipsInitializer(shipBuilder(2));
+  shipsInitializer(shipBuilder(2));
+  shipsInitializer(shipBuilder(2));
+  shipsInitializer(shipBuilder(1));
+  shipsInitializer(shipBuilder(1));
+  shipsInitializer(shipBuilder(1));
+  shipsInitializer(shipBuilder(1));
   startCountdownTimer();
   await import('./controller/userActionGrid');
 }
