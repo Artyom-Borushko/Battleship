@@ -5,11 +5,9 @@ import { startCountdownTimer } from './controller/infoPanel';
 import {
   boat4, boat3_1, boat3_2, boat2_1, boat2_2, boat2_3, boat1_1, boat1_2, boat1_3, boat1_4,
 } from './constants/ships';
-
-const loginFormSelector = document.querySelector('#login-form');
-const nameInputSelector = document.querySelector('.name-input');
-const startButtonSelector = document.querySelector('.start-button');
-const gameScreenSelector = document.querySelector('.game-screen');
+import {
+  loginFormSelector, nameInputSelector, startButtonSelector, gameScreen,
+} from './constants/querySelectors';
 
 function loginButtonEnabler(event) {
   if (event.key) {
@@ -30,7 +28,7 @@ async function onLoginFormSubmit(event) {
   event.preventDefault();
   saveUserToLocalStorage();
   loginFormSelector.style.display = 'none';
-  gameScreenSelector.style.display = 'block';
+  gameScreen.style.display = 'block';
   createBattleshipGrid();
   generateEmptyCells();
   shipsInitializer(boat4);

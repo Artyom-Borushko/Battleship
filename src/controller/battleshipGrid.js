@@ -7,11 +7,10 @@ import fourCellShipImage from '../assets/shipsImages/4-cell-ship.png';
 import threeCellShipImage from '../assets/shipsImages/3-cell-ship.png';
 import twoCellShipImage from '../assets/shipsImages/2-cell-ship.png';
 import oneCellShipImage from '../assets/shipsImages/1-cell-ship.png';
+import { battleshipGrid } from '../constants/querySelectors';
 
 let emptyCells = [];
 export const allBoatsCoordinates = [];
-
-const battleshipGrid = document.querySelector('.battleship-panel');
 
 export function createBattleshipGrid() {
   for (let column = 0; column <= 10; column++) {

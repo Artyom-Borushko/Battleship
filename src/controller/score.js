@@ -1,6 +1,4 @@
-const nameColumn = document.querySelector('.end-game-table-name');
-const shotsColumn = document.querySelector('.end-game-table-shots');
-const timeColumn = document.querySelector('.end-game-table-time');
+import { nameColumn, shotsColumn, timeColumn } from '../constants/querySelectors';
 
 const sortedArrayOfUsers = [];
 
