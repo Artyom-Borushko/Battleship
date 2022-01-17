@@ -5,6 +5,7 @@ import shipBuilder from './utils/shipBuilder';
 import {
   loginFormSelector, nameInputSelector, startButtonSelector, gameScreen,
 } from './constants/querySelectors';
+import { saveUserToLocalStorage } from './controller/localStorageController';
 
 function loginButtonEnabler(event) {
   if (event.key) {
@@ -15,15 +16,9 @@ function loginButtonEnabler(event) {
   }
 }
 
-function saveUserToLocalStorage() {
-  localStorage.setItem(localStorage.length + 1, JSON.stringify({
-    name: nameInputSelector.value,
-  }));
-}
-
 async function onLoginFormSubmit(event) {
   event.preventDefault();
-  saveUserToLocalStorage();
+  saveUserToLocalStorage(nameInputSelector.value);
   loginFormSelector.style.display = 'none';
   gameScreen.style.display = 'block';
   createBattleshipGrid();

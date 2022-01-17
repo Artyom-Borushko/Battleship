@@ -1,4 +1,5 @@
 import { nameColumn, shotsColumn, timeColumn } from '../constants/querySelectors';
+import { getUserFromLocalStorage } from './localStorageController';
 
 const sortedArrayOfUsers = [];
 
@@ -54,7 +55,7 @@ function compare(a, b) {
 
 function sortLocalStorageUsers() {
   for (let i = 1; i < localStorage.length + 1; i++) {
-    const iterationUserData = JSON.parse(localStorage.getItem(i));
+    const iterationUserData = JSON.parse(getUserFromLocalStorage(i));
     sortedArrayOfUsers.push(iterationUserData);
   }
   sortedArrayOfUsers.sort(compare);

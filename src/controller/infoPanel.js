@@ -7,22 +7,11 @@ import {
   fourCellShip, firstThreeCellShip, secondThreeCellShip, firstTwoCellShip, secondTwoCellShip,
   thirdTwoCellShip, firstOneCellShip, secondOneCellShip, thirdOneCellShip, fourthOneCellShip,
 } from '../constants/querySelectors';
+import { updateUserLocalStorageTime, removeUserFromLocalStorage, updateUserLocalStorageAmmo } from './localStorageController';
 
 let availableAmmo = 30;
 let defaultAmmo = 0;
 export let timer;
-
-function updateLocalStorageTime(timeLeft) {
-  const currentUserData = localStorage.getItem(localStorage.length);
-  const parsedUsedData = JSON.parse(currentUserData);
-  if (parsedUsedData !== null) {
-    localStorage.setItem(localStorage.length, JSON.stringify({
-      name: parsedUsedData.name,
-      availableAmmo,
-      timeLeft,
-    }));
-  }
-}
 
 export function startCountdownTimer() {
   const countDownDate = new Date(Date.now() + 15 * 60000);
@@ -36,10 +25,10 @@ export function startCountdownTimer() {
     } else {
       countDownTimer.innerHTML = `${minutes}:${seconds}`;
     }
-    updateLocalStorageTime(distance);
+    updateUserLocalStorageTime(availableAmmo, distance);
     if (distance < 0) {
       clearInterval(timer);
-      localStorage.removeItem(localStorage.length);
+      removeUserFromLocalStorage();
       gameScreen.style.display = 'none';
       endGameScreen.style.display = 'block';
       endGameScreenHeader.innerHTML = 'Game Over';
@@ -48,19 +37,10 @@ export function startCountdownTimer() {
   }, 1000);
 }
 
-function updateLocalStorageAmmo() {
-  const currentUserData = localStorage.getItem(localStorage.length);
-  const parsedUsedData = JSON.parse(currentUserData);
-  localStorage.setItem(localStorage.length, JSON.stringify({
-    name: parsedUsedData.name,
-    availableAmmo,
-  }));
-}
-
 export function reduceAmmo() {
   availableAmmo--;
   ammoInfo.innerHTML = `${availableAmmo}/30`;
-  updateLocalStorageAmmo();
+  updateUserLocalStorageAmmo(availableAmmo);
 }
 
 export function increaseAmmoProgressBar() {
