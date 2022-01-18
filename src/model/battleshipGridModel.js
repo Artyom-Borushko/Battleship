@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import BATTLESHIP_HEADERS from '../constants/battleshipHeaders';
 import { battleshipGrid } from '../constants/querySelectors';
 import missIcon from '../assets/icons/missIcon.png';
@@ -84,13 +83,6 @@ function generateArrayOfIndexes(columnsCount, rowsCount) {
   return emptyCells;
 }
 
-function deleteOccupiedCellsFromEmptyCells(occupiedCells, emptyCells) {
-  for (let i = 0; i < occupiedCells.length; i++) {
-    emptyCells = emptyCells.filter((item) => item !== occupiedCells[i]);
-  }
-  return emptyCells;
-}
-
 function canBoatBePlacedInColumn(boat, columnToStart, rowToStart, emptyCells) {
   let indicator = false;
   for (let i = 0; i < boat.boatLength; i++) {
@@ -133,10 +125,11 @@ function generateMissImage(e) {
 }
 
 function generateMissImageAroundSunkBoat(cellAroundSunkBoat) {
+  const cellAroundSunkBoatLocator = cellAroundSunkBoat;
   const missIconImage = new Image();
   missIconImage.src = missIcon;
-  cellAroundSunkBoat.style.position = 'relative';
-  cellAroundSunkBoat.classList.add('miss-image-container');
+  cellAroundSunkBoatLocator.style.position = 'relative';
+  cellAroundSunkBoatLocator.classList.add('miss-image-container');
   missIconImage.classList.add('miss-image');
   return missIconImage;
 }
@@ -150,12 +143,13 @@ function generateHitImage(e) {
 }
 
 function generateSunkBoatImage(boatLength, shipLocator) {
+  const sunkShipLocator = shipLocator;
   const sunkBoatImage = new Image();
   if (boatLength === 4) sunkBoatImage.src = fourCellShipImage;
   else if (boatLength === 3) sunkBoatImage.src = threeCellShipImage;
   else if (boatLength === 2) sunkBoatImage.src = twoCellShipImage;
   else sunkBoatImage.src = oneCellShipImage;
-  shipLocator.style.position = 'relative';
+  sunkShipLocator.style.position = 'relative';
   sunkBoatImage.style.width = `${boatLength * 50}px`;
   sunkBoatImage.classList.add('sunk-boat-image');
   return sunkBoatImage;
@@ -163,7 +157,7 @@ function generateSunkBoatImage(boatLength, shipLocator) {
 
 export {
   initializeBattleshipGrid, columnOccupationLogic, rowOccupationLogic, generateDirection,
-  generatePlaceToStart, generateArrayOfIndexes, deleteOccupiedCellsFromEmptyCells,
+  generatePlaceToStart, generateArrayOfIndexes,
   generateMissImage, generateHitImage, generateMissImageAroundSunkBoat, generateSunkBoatImage,
   canBoatBePlacedInColumn, canBoatBePlacedInRow,
 };

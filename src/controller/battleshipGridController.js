@@ -3,7 +3,7 @@ import {
   initializeBattleshipGrid, columnOccupationLogic, rowOccupationLogic,
   generateDirection, generatePlaceToStart, generateArrayOfIndexes,
   generateMissImage, generateHitImage, generateMissImageAroundSunkBoat,
-  generateSunkBoatImage, deleteOccupiedCellsFromEmptyCells,
+  generateSunkBoatImage,
   canBoatBePlacedInColumn, canBoatBePlacedInRow,
 } from '../model/battleshipGridModel';
 
@@ -43,7 +43,9 @@ export function shipPlacement(boat) {
           .filter((e) => !tempOccupation.includes(e));
         boatsState[boatsState.length - 1].direction = direction;
 
-        emptyCells = deleteOccupiedCellsFromEmptyCells(occupiedArr, emptyCells);
+        for (let i = 0; i < occupiedArr.length; i++) {
+          emptyCells = emptyCells.filter((item) => item !== occupiedArr[i]);
+        }
         isPlaced = true;
       }
     } else if (direction === 0) {
@@ -62,7 +64,9 @@ export function shipPlacement(boat) {
           .filter((e) => !tempOccupation.includes(e));
         boatsState[boatsState.length - 1].direction = direction;
 
-        emptyCells = deleteOccupiedCellsFromEmptyCells(occupiedArr, emptyCells);
+        for (let i = 0; i < occupiedArr.length; i++) {
+          emptyCells = emptyCells.filter((item) => item !== occupiedArr[i]);
+        }
         isPlaced = true;
       }
     }
