@@ -1,5 +1,5 @@
 import { allBoatsCoordinates } from './battleshipGridController';
-import { timer } from './infoPanelController';
+import { stopCountdownTimer } from './infoPanelController';
 import {
   gameScreen, endGameScreen, endGameScreenHeader,
 } from '../constants/querySelectors';
@@ -22,7 +22,7 @@ export default function isGameCompleted(boatCoordinates = undefined) {
     endGameScreenHeader.innerHTML = 'Game Over';
   }
   if (gameOver) {
-    clearInterval(timer);
+    stopCountdownTimer();
     gameScreen.style.display = 'none';
     endGameScreen.style.display = 'block';
     generateEndGameScore(10);

@@ -8,8 +8,11 @@ import { generateFireIconForInfoPanel, getSunkBoatImageLocator, calculateMinutes
 
 let availableAmmo = 30;
 let defaultAmmo = 0;
-// eslint-disable-next-line import/no-mutable-exports
-export let timer;
+let timer;
+
+export function stopCountdownTimer() {
+  clearInterval(timer);
+}
 
 export function startCountdownTimer(timerTime) {
   const countDownDate = new Date(Date.now() + timerTime * 60000);
@@ -22,7 +25,7 @@ export function startCountdownTimer(timerTime) {
     }
     updateUserLocalStorageTime(availableAmmo, distance);
     if (distance < 0) {
-      clearInterval(timer);
+      stopCountdownTimer();
       removeUserFromLocalStorage();
       gameScreen.style.display = 'none';
       endGameScreen.style.display = 'block';
