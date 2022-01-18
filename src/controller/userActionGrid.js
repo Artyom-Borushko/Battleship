@@ -1,4 +1,4 @@
-import { reduceAmmo, increaseAmmoProgressBar, addFireIconToInfoPanelBoat } from './infoPanel';
+import { reduceAmmo, increaseAmmoProgressBar, addFireIconToInfoPanelBoat } from './infoPanelController';
 import { isAllBoatsSunk, isAmmoOver } from './endGameConditions';
 import boatsState from '../state/boatsState';
 import {

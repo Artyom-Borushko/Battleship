@@ -1,6 +1,6 @@
 import './styles/style.scss';
 import { createBattleshipGrid, generateEmptyCells, shipPlacement } from './controller/battleshipGridController';
-import { startCountdownTimer } from './controller/infoPanel';
+import { startCountdownTimer } from './controller/infoPanelController';
 import shipBuilder from './utils/shipBuilder';
 import {
   loginFormSelector, nameInputSelector, startButtonSelector, gameScreen,
@@ -33,7 +33,7 @@ async function onLoginFormSubmit(event) {
   shipPlacement(shipBuilder(1));
   shipPlacement(shipBuilder(1));
   shipPlacement(shipBuilder(1));
-  startCountdownTimer();
+  startCountdownTimer(15);
   await import('./controller/userActionGrid');
 }
 

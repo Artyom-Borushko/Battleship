@@ -1,6 +1,6 @@
 import { allBoatsCoordinates } from './battleshipGridController';
 import generateEndGameScore from './score';
-import { timer } from './infoPanel';
+import { timer } from './infoPanelController';
 import {
   gameScreen, endGameScreen, endGameScreenHeader, remainingAmmo,
 } from '../constants/querySelectors';
