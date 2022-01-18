@@ -1,11 +1,12 @@
 import './styles/style.scss';
 import { createBattleshipGrid, generateEmptyCells, shipPlacement } from './controller/battleshipGridController';
 import { startCountdownTimer } from './controller/infoPanelController';
-import shipBuilder from './utils/shipBuilder';
+import shipsBuilder from './utils/shipBuilder';
 import {
   loginFormSelector, nameInputSelector, startButtonSelector, gameScreen,
 } from './constants/querySelectors';
 import { saveUserToLocalStorage } from './controller/localStorageController';
+import boatsState from './state/boatsState';
 
 function loginButtonEnabler(event) {
   if (event.key) {
@@ -23,16 +24,10 @@ async function onLoginFormSubmit(event) {
   gameScreen.style.display = 'block';
   createBattleshipGrid(10, 10);
   generateEmptyCells(10, 10);
-  shipPlacement(shipBuilder(4));
-  shipPlacement(shipBuilder(3));
-  shipPlacement(shipBuilder(3));
-  shipPlacement(shipBuilder(2));
-  shipPlacement(shipBuilder(2));
-  shipPlacement(shipBuilder(2));
-  shipPlacement(shipBuilder(1));
-  shipPlacement(shipBuilder(1));
-  shipPlacement(shipBuilder(1));
-  shipPlacement(shipBuilder(1));
+  shipsBuilder(4, 3, 3, 2, 2, 2, 1, 1, 1, 1);
+  boatsState.forEach((boat) => {
+    shipPlacement(boat);
+  });
   startCountdownTimer(15);
   await import('./controller/userActionGrid');
 }
