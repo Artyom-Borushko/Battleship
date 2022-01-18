@@ -1,5 +1,5 @@
 import { reduceAmmo, increaseAmmoProgressBar, addFireIconToInfoPanelBoat } from './infoPanelController';
-import { isAllBoatsSunk, isAmmoOver } from './endGameConditions';
+import isGameCompleted from './gameController';
 import boatsState from '../state/boatsState';
 import {
   addMissImage, addMissImageAroundSunkBoat, addHitImage,
@@ -16,7 +16,7 @@ function validateAttack(e) {
       reduceAmmo();
       increaseAmmoProgressBar();
       addMissImage(e);
-      isAmmoOver();
+      isGameCompleted();
       e.target.classList.remove('battleship-cell-playable');
     }
     if (isHitSucceeded.length && boatsState[i].livesCount !== 0) {
@@ -39,7 +39,7 @@ function validateAttack(e) {
         addFireIconToInfoPanelBoat(boatsState[i].boatLength);
         addSunkBoatImageToBattleship(boatsState[i]);
       }
-      isAllBoatsSunk(e.target.dataset.location);
+      isGameCompleted(e.target.dataset.location);
       break;
     }
   }

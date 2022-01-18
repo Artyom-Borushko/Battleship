@@ -1,4 +1,4 @@
-import generateEndGameScore from './score';
+import { generateEndGameScore } from '../model/gameModel';
 import {
   gameScreen, endGameScreen, endGameScreenHeader, ammoProgressBar, countDownTimer,
   remainingAmmo as ammoInfo,

@@ -1,5 +1,19 @@
-import { nameColumn, shotsColumn, timeColumn } from '../constants/querySelectors';
-import { getUserFromLocalStorage } from './localStorageController';
+import {
+  remainingAmmo, nameColumn, shotsColumn, timeColumn,
+} from '../constants/querySelectors';
+import { getUserFromLocalStorage } from '../controller/localStorageController';
+
+function isGameOver(remainingBoatsCoordinates) {
+  const availableAmmoCounter = remainingAmmo.innerText;
+  const availableAmmo = parseInt(availableAmmoCounter.substring(0, availableAmmoCounter.indexOf('/')), 10);
+  if (!remainingBoatsCoordinates.length) {
+    return [true, 'allBoatsSunk'];
+  }
+  if (availableAmmo === 0) {
+    return [true, 'ammoOver'];
+  }
+  return [false, '-1'];
+}
 
 const sortedArrayOfUsers = [];
 
@@ -61,7 +75,9 @@ function sortLocalStorageUsers() {
   sortedArrayOfUsers.sort(compare);
 }
 
-export default function generateEndGameScore() {
+function generateEndGameScore(numberOfLines = 10) {
   sortLocalStorageUsers();
-  appendDataToScoreTable(10);
+  appendDataToScoreTable(numberOfLines);
 }
+
+export { isGameOver, generateEndGameScore };
