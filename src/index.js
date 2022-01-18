@@ -1,5 +1,5 @@
 import './styles/style.scss';
-import { createBattleshipGrid, generateEmptyCells, shipsInitializer } from './controller/battleshipGrid';
+import { createBattleshipGrid, generateEmptyCells, shipPlacement } from './controller/battleshipGridController';
 import { startCountdownTimer } from './controller/infoPanel';
 import shipBuilder from './utils/shipBuilder';
 import {
@@ -21,18 +21,18 @@ async function onLoginFormSubmit(event) {
   saveUserToLocalStorage(nameInputSelector.value);
   loginFormSelector.style.display = 'none';
   gameScreen.style.display = 'block';
-  createBattleshipGrid();
-  generateEmptyCells();
-  shipsInitializer(shipBuilder(4));
-  shipsInitializer(shipBuilder(3));
-  shipsInitializer(shipBuilder(3));
-  shipsInitializer(shipBuilder(2));
-  shipsInitializer(shipBuilder(2));
-  shipsInitializer(shipBuilder(2));
-  shipsInitializer(shipBuilder(1));
-  shipsInitializer(shipBuilder(1));
-  shipsInitializer(shipBuilder(1));
-  shipsInitializer(shipBuilder(1));
+  createBattleshipGrid(10, 10);
+  generateEmptyCells(10, 10);
+  shipPlacement(shipBuilder(4));
+  shipPlacement(shipBuilder(3));
+  shipPlacement(shipBuilder(3));
+  shipPlacement(shipBuilder(2));
+  shipPlacement(shipBuilder(2));
+  shipPlacement(shipBuilder(2));
+  shipPlacement(shipBuilder(1));
+  shipPlacement(shipBuilder(1));
+  shipPlacement(shipBuilder(1));
+  shipPlacement(shipBuilder(1));
   startCountdownTimer();
   await import('./controller/userActionGrid');
 }

@@ -1,4 +1,4 @@
-import { allBoatsCoordinates } from './battleshipGrid';
+import { allBoatsCoordinates } from './battleshipGridController';
 import generateEndGameScore from './score';
 import { timer } from './infoPanel';
 import {

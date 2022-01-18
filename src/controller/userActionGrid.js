@@ -2,9 +2,9 @@ import { reduceAmmo, increaseAmmoProgressBar, addFireIconToInfoPanelBoat } from 
 import { isAllBoatsSunk, isAmmoOver } from './endGameConditions';
 import boatsState from '../state/boatsState';
 import {
-  generateMissImage, generateMissImageAroundSunkBoat, generateHitImage,
+  addMissImage, addMissImageAroundSunkBoat, addHitImage,
   addSunkBoatImageToBattleship,
-} from './battleshipGrid';
+} from './battleshipGridController';
 import { playAgainButton } from '../constants/querySelectors';
 
 function validateAttack(e) {
@@ -15,13 +15,13 @@ function validateAttack(e) {
     if (!isHitSucceeded.length && i === boatsState.length - 1) {
       reduceAmmo();
       increaseAmmoProgressBar();
-      generateMissImage(e);
+      addMissImage(e);
       isAmmoOver();
       e.target.classList.remove('battleship-cell-playable');
     }
     if (isHitSucceeded.length && boatsState[i].livesCount !== 0) {
       boatsState[i].livesCount--;
-      generateHitImage(e);
+      addHitImage(e);
       e.target.classList.remove('battleship-cell-playable');
       if (boatsState[i].livesCount === 0) {
         for (let j = 0; j < boatsState[i].occupiedCoordinates.length; j++) {
@@ -31,7 +31,7 @@ function validateAttack(e) {
           if (firstCoordinate < 11 && firstCoordinate > 0
             && secondCoordinate < 11 && secondCoordinate > 0) {
             if (cellAroundSunkBoat.getElementsByTagName('img').length === 0) {
-              generateMissImageAroundSunkBoat(cellAroundSunkBoat);
+              addMissImageAroundSunkBoat(cellAroundSunkBoat);
               cellAroundSunkBoat.classList.remove('battleship-cell-playable');
             }
           }
