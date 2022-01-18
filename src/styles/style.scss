@@ -4,7 +4,7 @@ $fz: 40px;
 $formMargin: 50px;
 $maxShipImageWidth: 100%;
 
-@mixin button {
+@mixin actionButton {
   background-color: #04AA6D;
   color: white;
   max-width: 200px;
@@ -77,7 +77,7 @@ body {
       margin-bottom: 20px;
     }
     .start-button {
-      @include button;
+      @include actionButton;
     }
     .start-button:disabled {
       cursor: not-allowed;;
@@ -251,7 +251,7 @@ body {
       margin-bottom: 30px;
     }
     .play-again-button {
-      @include button;
+      @include actionButton;
     }
     .end-game-table {
       display: flex;

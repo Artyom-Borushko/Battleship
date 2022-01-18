@@ -5,8 +5,7 @@ import {
   generateMissImage, generateMissImageAroundSunkBoat, generateHitImage,
   addSunkBoatImageToBattleship,
 } from './battleshipGrid';
-
-const playAgainButton = document.querySelector('.play-again-button');
+import { playAgainButton } from '../constants/querySelectors';
 
 function validateAttack(e) {
   for (let i = 0; i < boatsState.length; i++) {
@@ -37,7 +36,7 @@ function validateAttack(e) {
             }
           }
         }
-        addFireIconToInfoPanelBoat(boatsState[i].id);
+        addFireIconToInfoPanelBoat(boatsState[i].boatLength);
         addSunkBoatImageToBattleship(boatsState[i]);
       }
       isAllBoatsSunk(e.target.dataset.location);

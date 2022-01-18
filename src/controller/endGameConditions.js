@@ -1,11 +1,10 @@
 import { allBoatsCoordinates } from './battleshipGrid';
 import generateEndGameScore from './score';
 import { timer } from './infoPanel';
-
-const gameScreen = document.querySelector('.game-screen');
-const endGameScreen = document.querySelector('.end-game-screen');
-const endGameScreenHeader = document.querySelector('.end-game-header');
-const remainingAmmo = document.querySelector('.available-ammo');
+import {
+  gameScreen, endGameScreen, endGameScreenHeader, remainingAmmo,
+} from '../constants/querySelectors';
+import { removeUserFromLocalStorage } from './localStorageController';
 
 let remainingBoatsCoordinates = [...allBoatsCoordinates];
 
@@ -26,7 +25,7 @@ export function isAmmoOver() {
   const availableAmmo = parseInt(availableAmmoCounter.substring(0, availableAmmoCounter.indexOf('/')), 10);
   if (availableAmmo === 0) {
     clearInterval(timer);
-    localStorage.removeItem(localStorage.length);
+    removeUserFromLocalStorage();
     gameScreen.style.display = 'none';
     endGameScreen.style.display = 'block';
     endGameScreenHeader.innerHTML = 'Game Over';

@@ -1,41 +1,17 @@
 /* eslint-disable import/no-mutable-exports */
 import generateEndGameScore from './score';
 import fireIcon from '../assets/icons/fireIcon.png';
-
-const gameScreen = document.querySelector('.game-screen');
-const endGameScreen = document.querySelector('.end-game-screen');
-const endGameScreenHeader = document.querySelector('.end-game-header');
-
-const ammoProgressBar = document.querySelector('.ammo-progress-bar-line');
-const countDownTimer = document.querySelector('.countdown-timer');
-const ammoInfo = document.querySelector('.available-ammo');
-
-const fourCellShip = document.querySelector('.four-cell-ship');
-const firstThreeCellShip = document.querySelector('.first-three-cells-ship');
-const secondThreeCellShip = document.querySelector('.second-three-cells-ship');
-const firstTwoCellShip = document.querySelector('.first-two-cells-ship');
-const secondTwoCellShip = document.querySelector('.second-two-cells-ship');
-const thirdTwoCellShip = document.querySelector('.third-two-cells-ship');
-const firstOneCellShip = document.querySelector('.first-one-cell-ship');
-const secondOneCellShip = document.querySelector('.second-one-cell-ship');
-const thirdOneCellShip = document.querySelector('.third-one-cell-ship');
-const fourthOneCellShip = document.querySelector('.fourth-one-cell-ship');
+import {
+  gameScreen, endGameScreen, endGameScreenHeader, ammoProgressBar, countDownTimer,
+  remainingAmmo as ammoInfo,
+  fourCellShip, firstThreeCellShip, secondThreeCellShip, firstTwoCellShip, secondTwoCellShip,
+  thirdTwoCellShip, firstOneCellShip, secondOneCellShip, thirdOneCellShip, fourthOneCellShip,
+} from '../constants/querySelectors';
+import { updateUserLocalStorageTime, removeUserFromLocalStorage, updateUserLocalStorageAmmo } from './localStorageController';
 
 let availableAmmo = 30;
 let defaultAmmo = 0;
 export let timer;
-
-function updateLocalStorageTime(timeLeft) {
-  const currentUserData = localStorage.getItem(localStorage.length);
-  const parsedUsedData = JSON.parse(currentUserData);
-  if (parsedUsedData !== null) {
-    localStorage.setItem(localStorage.length, JSON.stringify({
-      name: parsedUsedData.name,
-      availableAmmo,
-      timeLeft,
-    }));
-  }
-}
 
 export function startCountdownTimer() {
   const countDownDate = new Date(Date.now() + 15 * 60000);
@@ -49,10 +25,10 @@ export function startCountdownTimer() {
     } else {
       countDownTimer.innerHTML = `${minutes}:${seconds}`;
     }
-    updateLocalStorageTime(distance);
+    updateUserLocalStorageTime(availableAmmo, distance);
     if (distance < 0) {
       clearInterval(timer);
-      localStorage.removeItem(localStorage.length);
+      removeUserFromLocalStorage();
       gameScreen.style.display = 'none';
       endGameScreen.style.display = 'block';
       endGameScreenHeader.innerHTML = 'Game Over';
@@ -61,19 +37,10 @@ export function startCountdownTimer() {
   }, 1000);
 }
 
-function updateLocalStorageAmmo() {
-  const currentUserData = localStorage.getItem(localStorage.length);
-  const parsedUsedData = JSON.parse(currentUserData);
-  localStorage.setItem(localStorage.length, JSON.stringify({
-    name: parsedUsedData.name,
-    availableAmmo,
-  }));
-}
-
 export function reduceAmmo() {
   availableAmmo--;
   ammoInfo.innerHTML = `${availableAmmo}/30`;
-  updateLocalStorageAmmo();
+  updateUserLocalStorageAmmo(availableAmmo);
 }
 
 export function increaseAmmoProgressBar() {
@@ -95,41 +62,37 @@ function generateFireIconForInfoPanel() {
   return fireIconImage;
 }
 
-export function addFireIconToInfoPanelBoat(id) {
+export function addFireIconToInfoPanelBoat(boatLength) {
   const fireIconImage = generateFireIconForInfoPanel();
 
-  switch (id) {
-    case 1:
-      fourCellShip.appendChild(fireIconImage);
-      break;
-    case 2:
+  if (boatLength === 4) {
+    fourCellShip.appendChild(fireIconImage);
+  }
+  if (boatLength === 3) {
+    if (firstThreeCellShip.getElementsByTagName('img').length !== 2) {
       firstThreeCellShip.appendChild(fireIconImage);
-      break;
-    case 3:
+    } else {
       secondThreeCellShip.appendChild(fireIconImage);
-      break;
-    case 4:
+    }
+  }
+  if (boatLength === 2) {
+    if (firstTwoCellShip.getElementsByTagName('img').length !== 2) {
       firstTwoCellShip.appendChild(fireIconImage);
-      break;
-    case 5:
+    } else if (secondTwoCellShip.getElementsByTagName('img').length !== 2) {
       secondTwoCellShip.appendChild(fireIconImage);
-      break;
-    case 6:
+    } else {
       thirdTwoCellShip.appendChild(fireIconImage);
-      break;
-    case 7:
+    }
+  }
+  if (boatLength === 1) {
+    if (firstOneCellShip.getElementsByTagName('img').length !== 2) {
       firstOneCellShip.appendChild(fireIconImage);
-      break;
-    case 8:
+    } else if (secondOneCellShip.getElementsByTagName('img').length !== 2) {
       secondOneCellShip.appendChild(fireIconImage);
-      break;
-    case 9:
+    } else if (thirdOneCellShip.getElementsByTagName('img').length !== 2) {
       thirdOneCellShip.appendChild(fireIconImage);
-      break;
-    case 10:
+    } else {
       fourthOneCellShip.appendChild(fireIconImage);
-      break;
-    default:
-      break;
+    }
   }
 }
