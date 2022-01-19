@@ -1,4 +1,3 @@
-import boatsState from '../state/boatsState';
 import {
   initializeBattleshipGrid, columnOccupationLogic, rowOccupationLogic,
   generateDirection, generatePlaceToStart, generateArrayOfIndexes,
@@ -36,12 +35,12 @@ export function shipPlacement(boat) {
           allBoatsCoordinates.push(`${columnToStart}-${rowToStart + i}`);
         }
 
-        boatsState.push(boat);
-        boatsState[boatsState.length - 1].spawnCoordinates = tempOccupation;
+        const particularBoat = boat;
+        particularBoat.spawnCoordinates = tempOccupation;
         const occupiedArr = columnOccupationLogic(tempOccupation);
-        boatsState[boatsState.length - 1].occupiedCoordinates = occupiedArr
+        particularBoat.occupiedCoordinates = occupiedArr
           .filter((e) => !tempOccupation.includes(e));
-        boatsState[boatsState.length - 1].direction = direction;
+        particularBoat.direction = direction;
 
         for (let i = 0; i < occupiedArr.length; i++) {
           emptyCells = emptyCells.filter((item) => item !== occupiedArr[i]);
@@ -57,12 +56,12 @@ export function shipPlacement(boat) {
           allBoatsCoordinates.push(`${columnToStart + i}-${rowToStart}`);
         }
 
-        boatsState.push(boat);
-        boatsState[boatsState.length - 1].spawnCoordinates = tempOccupation;
+        const particularBoat = boat;
+        particularBoat.spawnCoordinates = tempOccupation;
         const occupiedArr = rowOccupationLogic(tempOccupation);
-        boatsState[boatsState.length - 1].occupiedCoordinates = occupiedArr
+        particularBoat.occupiedCoordinates = occupiedArr
           .filter((e) => !tempOccupation.includes(e));
-        boatsState[boatsState.length - 1].direction = direction;
+        particularBoat.direction = direction;
 
         for (let i = 0; i < occupiedArr.length; i++) {
           emptyCells = emptyCells.filter((item) => item !== occupiedArr[i]);
