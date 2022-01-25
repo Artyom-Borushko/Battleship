@@ -1,11 +1,12 @@
 import './styles/style.scss';
-import { createBattleshipGrid, generateEmptyCells, shipsInitializer } from './controller/battleshipGrid';
-import { startCountdownTimer } from './controller/infoPanel';
-import shipBuilder from './utils/shipBuilder';
+import { createBattleshipGrid, generateEmptyCells, shipPlacement } from './controller/battleshipGridController';
+import { startCountdownTimer } from './controller/infoPanelController';
+import shipsBuilder from './utils/shipBuilder';
 import {
   loginFormSelector, nameInputSelector, startButtonSelector, gameScreen,
 } from './constants/querySelectors';
 import { saveUserToLocalStorage } from './controller/localStorageController';
+import boatsState from './state/boatsState';
 
 function loginButtonEnabler(event) {
   if (event.key) {
@@ -21,19 +22,13 @@ async function onLoginFormSubmit(event) {
   saveUserToLocalStorage(nameInputSelector.value);
   loginFormSelector.style.display = 'none';
   gameScreen.style.display = 'block';
-  createBattleshipGrid();
-  generateEmptyCells();
-  shipsInitializer(shipBuilder(4));
-  shipsInitializer(shipBuilder(3));
-  shipsInitializer(shipBuilder(3));
-  shipsInitializer(shipBuilder(2));
-  shipsInitializer(shipBuilder(2));
-  shipsInitializer(shipBuilder(2));
-  shipsInitializer(shipBuilder(1));
-  shipsInitializer(shipBuilder(1));
-  shipsInitializer(shipBuilder(1));
-  shipsInitializer(shipBuilder(1));
-  startCountdownTimer();
+  createBattleshipGrid(10, 10);
+  generateEmptyCells(10, 10);
+  shipsBuilder(4, 3, 3, 2, 2, 2, 1, 1, 1, 1);
+  boatsState.forEach((boat) => {
+    shipPlacement(boat);
+  });
+  startCountdownTimer(15);
   await import('./controller/userActionGrid');
 }
 
